@@ -3,26 +3,30 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+# from .models import Profile, Categories, Table, Photo, Item, Order, Review
+
 # Create your views here.
 
 def home(request):
-    return render(request, 'home.html')
+  return render(request, 'home.html')
 
 def about(request):
-   return render(request, 'about.html')
- 
+  return render(request, 'about.html')
+
 def search(request):
   return render(request, 'search.html')
 
 def cart(request):
   return render(request, 'cart.html')
   
-
 def checkout(request):
   return render(request, 'checkout.html')
 
 def items_detail(request):
   return render(request, 'items_detail.html')
+
+def tables_detail(request):
+  return render(request, 'tables_detail.html')
 
 class ItemCreate(CreateView):
   pass
@@ -43,12 +47,20 @@ class TableDelete(DeleteView):
   pass
 
 # Public profile details view
-def profiles_detail(request):
-  return render(request, 'profiles/detail.html')
-
-# Private user profile view
-def users_detail(request):
+def profiles_detail(request, profile_id):
   pass
+  # profile = Profile.objects.get('profile_id': profile_id)
+  # # Need to identify what "username" is by connecting profile_id to it's user
+  # if request.user.username == username:
+  #   pass
+  #   return render(request, 'profiles/detail.html')
+  # else:
+  #   return render(request, 'different.html')
+
+## DON'T USE THIS AT THIS POINT
+# Private user profile view
+# def users_detail(request, profile_id):
+#   return render(request, 'users/detail.html')
 
 class ProfileCreate(CreateView):
   pass
