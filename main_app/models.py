@@ -34,8 +34,7 @@ class Profile(models.Model):
 
 
 class Categories(models.Model):
-    Categories = models.CharField(
-    max_length=1,
+    categories = models.CharField(
     choices=CATEGORIES,
     default=CATEGORIES[0][0]
     )
