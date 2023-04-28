@@ -30,6 +30,8 @@ class Categories(models.Model):
     default=CATEGORIES[0][0]
     )
 
+    def __str__(self):
+        return self.categories
 
 class Table(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -38,6 +40,7 @@ class Table(models.Model):
     table_description = models.TextField(max_length=1024)
     # table_logo = models.ForeignKey(Photo, on_delete=models.CASCADE)
 
+   
 
 class Item(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
