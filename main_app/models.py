@@ -45,6 +45,12 @@ class Table(models.Model):
     categories = models.ForeignKey(Categories, on_delete=models.CASCADE)
     table_name = models.CharField(max_length=100)
     table_description = models.TextField(max_length=1024)
+    table_logo = models.ForeignKey(Photo, on_delete=models.CASCADE)
+
+class Photo(models.Model):
+    url =models.CharField(max_length=200)
+    table = models.ForeignKey(Table, on_delete=models.CASCADE)    
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)    
 
 
 class Item(models.Model):
@@ -53,6 +59,7 @@ class Item(models.Model):
     categories = models.ForeignKey(Categories, on_delete=models.CASCADE)
     item_name = models.CharField(max_length=100)
     item_price = models.IntegerField(max_length=100)
+    item_picture = models.ForeignKey(Photo,on_delete.CASCADE)
     # item_category = models.CharField(max_length=100)
 
 
