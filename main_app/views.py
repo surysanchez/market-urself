@@ -48,7 +48,7 @@ class TableDelete(DeleteView):
 
 # Public profile details view
 def profiles_detail(request, profile_id):
-  pass
+  return render(request, 'profiles/detail', )
   # profile = Profile.objects.get('profile_id': profile_id)
   # # Need to identify what "username" is by connecting profile_id to it's user
   # if request.user.username == username:
@@ -70,8 +70,7 @@ class ProfileUpdate(UpdateView):
 
 class ProfileDelete(DeleteView):
   pass
-
-
+  
 
 def signup(request):
     error_message = ''
