@@ -1,10 +1,65 @@
 from django.shortcuts import render, redirect
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 
 def home(request):
     return render(request, 'home.html')
+
+def about(request):
+   return render(request, 'about.html')
+ 
+def search(request):
+  return render(request, 'search.html')
+
+def cart(request):
+  return render(request, 'cart.html')
+  
+
+def checkout(request):
+  return render(request, 'checkout.html')
+
+def items_detail(request):
+  return render(request, 'items_detail.html')
+
+class ItemCreate(CreateView):
+  pass
+  
+class ItemUpdate(UpdateView):
+  pass
+  
+class ItemDelete(DeleteView):
+  pass
+
+class TableCreate(CreateView):
+  pass
+  
+class TableUpdate(UpdateView):
+  pass
+  
+class TableDelete(DeleteView):
+  pass
+
+# Public profile details view
+def profiles_detail(request):
+  return render(request, 'profiles/detail.html')
+
+# Private user profile view
+def users_detail(request):
+  pass
+
+class ProfileCreate(CreateView):
+  pass
+
+class ProfileUpdate(UpdateView):
+  pass
+
+class ProfileDelete(DeleteView):
+  pass
+
+
 
 def signup(request):
     error_message = ''
@@ -24,3 +79,4 @@ def signup(request):
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
+
