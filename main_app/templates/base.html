@@ -22,6 +22,8 @@
                     <li><a href="{% url 'about' %}">About</a></li>
                     <li><a href="{% url 'search' %}">Search</a></li>
                     <li><a href="{% url 'cart' %}">Cart</a></li>
+                    <li><a href="{% url 'tables_detail' %}">Table</a></li>
+
                     {% if user.is_authenticated %}
                     <li><a href="{% url 'profiles_detail' %}">Profile</a></li>
                     {% else %}

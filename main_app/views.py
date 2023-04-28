@@ -3,6 +3,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from .forms import TableForm, ItemForm
+from .models import Table, Item
 # from .models import Profile, Categories, Table, Photo, Item, Order, Review
 
 # Create your views here.
@@ -26,25 +28,36 @@ def items_detail(request):
   return render(request, 'items_detail.html')
 
 def tables_detail(request):
-  return render(request, 'tables_detail.html')
+  return render(request, 'tables/detail.html')
 
 class ItemCreate(CreateView):
-  pass
+  model = Item
+  fields = '__all__'
   
 class ItemUpdate(UpdateView):
-  pass
+  model = Item
+  fields = '__all__'
   
 class ItemDelete(DeleteView):
-  pass
+  model = Item
+  success_url = '/tables/tables_details.html'
+  
 
 class TableCreate(CreateView):
-  pass
+  model = Table
+  fields = '__all__'
+
+ 
   
 class TableUpdate(UpdateView):
-  pass
+  model = Table
+  fields = '__all__'
   
 class TableDelete(DeleteView):
-  pass
+  model = Table
+  success_url = '/'
+
+
 
 # Public profile details view
 def profiles_detail(request, profile_id):
