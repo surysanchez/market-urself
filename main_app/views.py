@@ -30,14 +30,17 @@ def items_detail(request):
 def tables_detail(request):
   return render(request, 'tables/detail.html')
 
+
 class ItemCreate(CreateView):
   model = Item
   fields = '__all__'
   
+
 class ItemUpdate(UpdateView):
   model = Item
   fields = '__all__'
-  
+
+
 class ItemDelete(DeleteView):
   model = Item
   success_url = '/tables/tables_details.html'
@@ -47,7 +50,6 @@ class TableCreate(CreateView):
   model = Table
   fields = '__all__'
 
- 
   
 class TableUpdate(UpdateView):
   model = Table
@@ -56,8 +58,6 @@ class TableUpdate(UpdateView):
 class TableDelete(DeleteView):
   model = Table
   success_url = '/'
-
-
 
 # Public profile details view
 def profiles_detail(request, profile_id):
