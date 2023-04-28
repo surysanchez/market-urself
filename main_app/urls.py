@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('accounts/signup/', views.signup, name='signup'),
+    # path('/accounts/login/', views.login, name='login'),
     path('about/', views.about, name='about'),
     path('search/', views.search, name='search'),
     # shopping cart
@@ -24,11 +25,11 @@ urlpatterns = [
     path('tables/<int:pk>/delete/', views.TableDelete.as_view(), name='tables_delete'),
 
     # public profile details view
-    path('users/<int:profiles_id>/', views.profiles_detail, name='users_detail'),
+    path('profiles/detail/', views.profiles_detail, name='profiles_detail'),
     # path('profiles/create', views.ProfilesCreate.as_view(), name='profiles_create'),
 
     # private user profile details
     # profile edit/create
-    path('users/<int:profiles_id>/update', views.ProfileUpdate.as_view(), name='profiles_update'),
-    path('users/<int:profiles_id>/delete', views.ProfileDelete.as_view(), name='profiles_delete'),
+    path('profiles/<int:profiles_id>/update', views.ProfileUpdate.as_view(), name='profiles_update'),
+    path('profiles/<int:profiles_id>/delete', views.ProfileDelete.as_view(), name='profiles_delete'),
 ]
