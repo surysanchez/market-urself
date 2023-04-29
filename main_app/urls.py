@@ -36,7 +36,7 @@ urlpatterns = [
 
     # profile details
     path('profiles/detail/', views.profiles_detail, name='profiles_detail'),
-    # path('profiles/create', views.ProfilesCreate.as_view(), 
+    path('profiles/create', views.ProfileCreate.as_view(), name='profiles_create'), 
     path('profiles/<int:profiles_id>/update', views.ProfileUpdate.as_view(), name='profiles_update'),
     path('profiles/<int:profiles_id>/delete', views.ProfileDelete.as_view(), name='profiles_delete'),
 ]
