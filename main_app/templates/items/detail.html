@@ -4,7 +4,7 @@
 <h1>Item Details</h1>
 
 <a href="{% url 'items_create' %}">Create a new item!</a>
-
+{% if items == True %}
 {% for item in items%}
   <p>Item User: {{ item.user }}</p>
   <p>Item ID: {{ item.id }}</p>
@@ -13,5 +13,6 @@
   <p>Item Description: {{ item.item_description }}</p>
   <p>Item Categories: {{ item.categories }}</p>
 {% endfor %}
+{% endif %}
 
 {% endblock %}

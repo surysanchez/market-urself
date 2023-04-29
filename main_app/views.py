@@ -34,8 +34,8 @@ def tables_detail(request):
 
 def profiles_detail(request):
   profile = Profile.objects.get(user=request.user)
-  return render(request, 'profiles/detail.html', {'profile': profile})
-
+  table = Profile.objects.get(user=request.user)
+  return render(request, 'profiles/detail.html', {'profile': profile, 'table': table})
 
 class ItemCreate(CreateView):
   model = Item
@@ -53,9 +53,14 @@ class ItemDelete(DeleteView):
   model = Item
   success_url = '/tables/tables_details.html'
 
+class TableDetail(DetailView):
+  model = Table
+
+
 class TableCreate(CreateView):
   model = Table
   fields = ['table_name', 'table_description', 'table_category']
+  success_url = '/profiles/details/'
 
   def form_valid(self, form):
     form.instance.user = self.request.user
@@ -63,7 +68,8 @@ class TableCreate(CreateView):
   
 class TableUpdate(UpdateView):
   model = Table
-  fields = '__all__'
+  fields = ['table_name', 'table_description', 'table_category']
+  success_url = '/profiles/details/'
   
 class TableDelete(DeleteView):
   model = Table

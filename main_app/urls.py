@@ -2,8 +2,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-
-
     # django sign up
     path('accounts/signup/', views.signup, name='signup'),
 
@@ -30,6 +28,7 @@ urlpatterns = [
 
     # table details
     path('tables/', views.tables_detail, name='tables_detail'),
+    path('tables/<int:pk>/', views.TableDetail.as_view(), name='tables_detail'),
     path('tables/create/', views.TableCreate.as_view(), name='tables_create'),
     path('tables/<int:pk>/update/', views.TableUpdate.as_view(), name='tables_update'),
     path('tables/<int:pk>/delete/', views.TableDelete.as_view(), name='tables_delete'),
@@ -37,6 +36,6 @@ urlpatterns = [
     # profile details
     path('profiles/details/', views.profiles_detail, name='profiles_detail'),
     path('profiles/create/', views.ProfileCreate.as_view(), name='profiles_create'), 
-    path('profiles/<int:profiles_id>/update/', views.ProfileUpdate.as_view(), name='profiles_update'),
-    path('profiles/<int:profiles_id>/delete/', views.ProfileDelete.as_view(), name='profiles_delete'),
+    path('profiles/<int:profile_id>/update/', views.ProfileUpdate.as_view(), name='profiles_update'),
+    path('profiles/<int:profile_id>/delete/', views.ProfileDelete.as_view(), name='profiles_delete'),
 ]

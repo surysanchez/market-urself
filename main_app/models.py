@@ -52,7 +52,10 @@ class Table(models.Model):
         return self.table_name
 
     def get_absolute_url(self):
-        return reverse('tables_detail')
+        return reverse('tables_detail', kwargs={'pk': self.id})
+    
+    def get_absolute_url(self):
+        return reverse('tables_update', kwargs={'pk': self.id})
 
 class Item(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
