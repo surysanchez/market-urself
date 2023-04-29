@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic import ListView, DetailView
+from django.views.generic import TemplateView, ListView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from .forms import TableForm, ItemForm
@@ -44,19 +44,13 @@ class ItemUpdate(UpdateView):
   model = Item
   fields = '__all__'
 
-
 class ItemDelete(DeleteView):
   model = Item
   success_url = '/tables/tables_details.html'
 
 class TableCreate(CreateView):
   model = Table
-<<<<<<< HEAD
-  fields = '__all__'
-
-=======
   fields = ['table_name', 'table_description', 'categories']
->>>>>>> main
   
 class TableUpdate(UpdateView):
   model = Table

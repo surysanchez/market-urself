@@ -40,14 +40,11 @@ class Table(models.Model):
     table_description = models.TextField(max_length=1024)
     # table_logo = models.ForeignKey(Photo, on_delete=models.CASCADE)
 
-<<<<<<< HEAD
-=======
     def __str__(self):
-        return f'{self.table_name}'
+        return self.table_name
 
     def get_absolute_url(self):
         return reverse('tables_detail')
->>>>>>> main
 
 class Item(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

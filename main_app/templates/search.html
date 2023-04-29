@@ -1,5 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Search Page</h1>
+<h1>Search Results</h1>
+
+<ul>
+  {% for table in object_list %}
+  <li>
+    {{ table.table_name}}, {{ table }}
+  </li>
+  {% endfor %}
+</ul>
+
 {% endblock %}
