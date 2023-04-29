@@ -13,15 +13,31 @@ CATEGORIES = (
     ('entertainmentables', 'Entertainables'),
 )
 
+TAGS = (
+    ('miscellaneous', 'Miscellaneous'),
+    ('wearables', 'Wearables'),
+    ('consumables', 'Consumables'),
+    ('homeables', 'Homeables'),
+    ('gardenables', 'Gardenables'),
+    ('entertainmentables', 'Entertainables'),
+)
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length= 100, default='')
+    last_name = models.CharField(max_length= 100, default='')
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
     zip = models.IntegerField(max_length=9)
     birthday = models.DateField()
     about = models.TextField(max_length=1024)
+
+    def __str__(self):
+        return self.user.username
+    
+    def get_absolute_url(self):
+        return reverse('profiles_detail')
 
 class Table(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -45,6 +61,10 @@ class Item(models.Model):
     item_price = models.IntegerField(max_length=100)
     item_description = models.TextField(max_length=1024, default='')
     # item_picture = models.ForeignKey(Photo, on_delete=models.CASCADE)
+    category = models.CharField(
+        choices=TAGS,
+        default=TAGS[0][0]
+        )
 
     def __str__(self):
         return f'{self.item_name}'

@@ -1,16 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<h1>Almost Done!</h1>
+<h1>Just add a few more details!</h1>
 <form action="" method="POST">
   {% csrf_token %}
   <table>
     {{form.as_table}}
   </table>
-  <input type="submit" class="btn" value="Create Table">
+  <input type="submit" class="btn" value="Create Profile">
 </form>
-
-
-
 
 {% endblock %}
