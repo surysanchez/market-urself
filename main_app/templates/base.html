@@ -20,6 +20,7 @@
                     <li><a href="{% url 'home' %}" class="left brand-logo">&nbsp;&nbsp;Market Urself</a></li>
                 </ul>
                 <ul class="right">
+                    <li>{{ user }}</li>
                     <li><a href="{% url 'about' %}">About</a></li>
                     <li><a href="{% url 'search' %}">Search</a></li>
                     <li><a href="{% url 'cart' %}">Cart</a></li>
@@ -28,8 +29,9 @@
 
                     {% if user.is_authenticated %}
                     <li><a href="{% url 'profiles_detail' %}">Profile</a></li>
+                    <li><a href="/accounts/logout/"></a>Log out</li>
                     {% else %}
-                    <li><a href="/accounts/login">Sign in</a></li>
+                    <li><a href="/accounts/login/">Sign in</a></li>
                     <li><a href="{% url 'signup' %}">Create Account</a></li>
                     {% endif %}
                 </ul>

@@ -52,7 +52,11 @@ class ItemDelete(DeleteView):
 
 class TableCreate(CreateView):
   model = Table
-  fields = ['table_name', 'table_description', 'categories']
+  fields = ['table_name', 'table_description', 'table_category']
+
+  def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
   
 class TableUpdate(UpdateView):
   model = Table

@@ -23,22 +23,14 @@ class Profile(models.Model):
     birthday = models.DateField()
     about = models.TextField(max_length=1024)
 
-
-class Categories(models.Model):
-    categories = models.CharField(
-    choices=CATEGORIES,
-    default=CATEGORIES[0][0]
-    )
-
-    def __str__(self):
-        return self.categories
-
 class Table(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    categories = models.ForeignKey(Categories, on_delete=models.CASCADE)
     table_name = models.CharField(max_length=100)
     table_description = models.TextField(max_length=1024)
-    # table_logo = models.ForeignKey(Photo, on_delete=models.CASCADE)
+    table_category = models.CharField(
+        choices=CATEGORIES,
+        default=CATEGORIES[0][0]
+        )
 
     def __str__(self):
         return self.table_name
@@ -49,7 +41,6 @@ class Table(models.Model):
 class Item(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     table = models.ForeignKey(Table, on_delete=models.CASCADE)
-    categories = models.ForeignKey(Categories, on_delete=models.CASCADE)
     item_name = models.CharField(max_length=100)
     item_price = models.IntegerField(max_length=100)
     item_description = models.TextField(max_length=1024, default='')
