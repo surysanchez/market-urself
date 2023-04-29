@@ -37,7 +37,7 @@ class Profile(models.Model):
         return self.user.username
     
     def get_absolute_url(self):
-        return reverse('profiles_detail')
+        return reverse('home')
 
 class Table(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

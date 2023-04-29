@@ -33,8 +33,8 @@ def tables_detail(request):
   return render(request, 'tables/detail.html', {'tables': tables})
 
 def profiles_detail(request):
-
-  return render(request, 'profiles/detail.html')
+  profile = Profile.objects.get(user=request.user)
+  return render(request, 'profiles/detail.html', {'profile': profile})
 
 
 class ItemCreate(CreateView):
@@ -94,7 +94,8 @@ class ProfileCreate(CreateView):
     return super().form_valid(form)
 
 class ProfileUpdate(UpdateView):
-  pass
+  model = Profile
+  fields = ['first_name', 'address']
 
 class ProfileDelete(DeleteView):
   pass

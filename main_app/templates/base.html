@@ -20,7 +20,9 @@
                     <li><a href="{% url 'home' %}" class="left brand-logo">&nbsp;&nbsp;Market Urself</a></li>
                 </ul>
                 <ul class="right">
+                    {% if user.is_authenticated %}
                     <li>{{ user }}</li>
+                    {% endif %}
                     <li><a href="{% url 'about' %}">About</a></li>
                     <li><a href="{% url 'search' %}">Search</a></li>
                     <li><a href="{% url 'cart' %}">Cart</a></li>
