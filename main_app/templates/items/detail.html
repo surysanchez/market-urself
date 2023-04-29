@@ -5,4 +5,13 @@
 
 <a href="{% url 'items_create' %}">Create a new item!</a>
 
+{% for item in items%}
+  <p>Item User: {{ item.user }}</p>
+  <p>Item ID: {{ item.id }}</p>
+  <p>Item Table: {{ item.table }}</p>
+  <p>Item Name: {{ item.item_name }}</p>
+  <p>Item Description: {{ item.item_description }}</p>
+  <p>Item Categories: {{ item.categories }}</p>
+{% endfor %}
+
 {% endblock %}

@@ -4,5 +4,11 @@
 <h1>Table Details</h1>
 
 <a href="{% url 'tables_create' %}">Create a new table!</a>
-
+{% for table in tables%}
+  <p>Table User: {{ table.user }}</p>
+  <p>Table ID: {{ table.id }}</p>
+  <p>Table Name: {{ table.table_name }}</p>
+  <p>Table Description: {{ table.table_description }}</p>
+  <p>Table Categories: {{ table.categories }}</p>
+{% endfor %}
 {% endblock %}
