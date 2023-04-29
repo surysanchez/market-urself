@@ -1,0 +1,13 @@
+:root {
+  --primary-color: #af7b49;
+  --secondary-color: #edf1d5;
+  --tertiary-color: #b39c58;
+}
+
+nav {
+  background-color: var(--primary-color);
+}
+
+.page-footer {
+  background-color: var(--primary-color);
+}

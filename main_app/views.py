@@ -25,10 +25,12 @@ def checkout(request):
   return render(request, 'checkout.html')
 
 def items_detail(request):
-  return render(request, 'items/detail.html')
+  items = Item.objects.filter(user=request.user)
+  return render(request, 'items/detail.html', {'items': items})
 
 def tables_detail(request):
-  return render(request, 'tables/detail.html')
+  tables = Table.objects.filter(user=request.user)
+  return render(request, 'tables/detail.html', {'tables': tables})
 
 
 class ItemCreate(CreateView):
