@@ -2,6 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+
+
     # django sign up
     path('accounts/signup/', views.signup, name='signup'),
 
