@@ -25,29 +25,38 @@ def checkout(request):
   return render(request, 'checkout.html')
 
 def items_detail(request):
-  return render(request, 'items_detail.html')
+  return render(request, 'items/detail.html')
 
 def tables_detail(request):
   return render(request, 'tables/detail.html')
 
+
 class ItemCreate(CreateView):
   model = Item
-  fields = '__all__'
+  fields = ['table', 'item_name', 'item_price', 'item_description', 'categories']
+
+  def form_valid(self, form):
+        form.instance.user = self.request.user # set the user
+        return super().form_valid(form)
   
+
 class ItemUpdate(UpdateView):
   model = Item
   fields = '__all__'
-  
+
+
 class ItemDelete(DeleteView):
   model = Item
   success_url = '/tables/tables_details.html'
-  
 
 class TableCreate(CreateView):
   model = Table
+<<<<<<< HEAD
   fields = '__all__'
 
- 
+=======
+  fields = ['table_name', 'table_description', 'categories']
+>>>>>>> main
   
 class TableUpdate(UpdateView):
   model = Table
@@ -56,8 +65,6 @@ class TableUpdate(UpdateView):
 class TableDelete(DeleteView):
   model = Table
   success_url = '/'
-
-
 
 # Public profile details view
 def profiles_detail(request, profile_id):

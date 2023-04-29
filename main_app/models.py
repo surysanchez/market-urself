@@ -5,12 +5,12 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 CATEGORIES = (
-  ('miscellaneous', 'Miscellaneous'),
-  ('wearables', 'Wearables'),
-  ('consumables', 'Consumables'),
-  ('homeables', 'Homeables'),
-  ('gardenables', 'Gardenables'),
-  ('entertainmentables', 'Entertainables'),
+    ('miscellaneous', 'Miscellaneous'),
+    ('wearables', 'Wearables'),
+    ('consumables', 'Consumables'),
+    ('homeables', 'Homeables'),
+    ('gardenables', 'Gardenables'),
+    ('entertainmentables', 'Entertainables'),
 )
 
 class Profile(models.Model):
@@ -40,7 +40,14 @@ class Table(models.Model):
     table_description = models.TextField(max_length=1024)
     # table_logo = models.ForeignKey(Photo, on_delete=models.CASCADE)
 
-   
+<<<<<<< HEAD
+=======
+    def __str__(self):
+        return f'{self.table_name}'
+
+    def get_absolute_url(self):
+        return reverse('tables_detail')
+>>>>>>> main
 
 class Item(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -48,8 +55,14 @@ class Item(models.Model):
     categories = models.ForeignKey(Categories, on_delete=models.CASCADE)
     item_name = models.CharField(max_length=100)
     item_price = models.IntegerField(max_length=100)
+    item_description = models.TextField(max_length=1024, default='')
     # item_picture = models.ForeignKey(Photo, on_delete=models.CASCADE)
-    # item_category = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f'{self.item_name}'
+
+    def get_absolute_url(self):
+        return reverse('items_detail')
 
 
 class Order(models.Model):
@@ -62,7 +75,6 @@ class Order(models.Model):
 class Review(models.Model):
     item_rating = models.IntegerField(max_length=5)
     item_review = models.TextField(max_length=1024)
-    pass
 
 
 class ItemPhoto(models.Model):
