@@ -4,7 +4,7 @@ from django.views.generic import TemplateView, ListView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from .forms import TableForm, ItemForm
-from .models import Table, Item
+from .models import Table, Item, Profile
 # from .models import Profile, Categories, Table, Photo, Item, Order, Review
 
 # Create your views here.
@@ -32,15 +32,18 @@ def tables_detail(request):
   tables = Table.objects.filter(user=request.user)
   return render(request, 'tables/detail.html', {'tables': tables})
 
+def profiles_detail(request):
+
+  return render(request, 'profiles/detail.html')
+
 
 class ItemCreate(CreateView):
   model = Item
   fields = ['table', 'item_name', 'item_price', 'item_description', 'categories']
 
   def form_valid(self, form):
-        form.instance.user = self.request.user # set the user
-        return super().form_valid(form)
-  
+    form.instance.user = self.request.user # set the user
+    return super().form_valid(form)
 
 class ItemUpdate(UpdateView):
   model = Item
@@ -55,8 +58,8 @@ class TableCreate(CreateView):
   fields = ['table_name', 'table_description', 'table_category']
 
   def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
+    form.instance.user = self.request.user
+    return super().form_valid(form)
   
 class TableUpdate(UpdateView):
   model = Table
@@ -67,8 +70,8 @@ class TableDelete(DeleteView):
   success_url = '/'
 
 # Public profile details view
-def profiles_detail(request, profile_id):
-  return render(request, 'profiles/detail', )
+# def profiles_detail(request):
+#   return render(request, 'profiles/detail', )
   # profile = Profile.objects.get('profile_id': profile_id)
   # # Need to identify what "username" is by connecting profile_id to it's user
   # if request.user.username == username:
@@ -83,7 +86,12 @@ def profiles_detail(request, profile_id):
 #   return render(request, 'users/detail.html')
 
 class ProfileCreate(CreateView):
-  pass
+  model = Profile
+  fields = ['first_name', 'last_name', 'address', 'city', 'zip', 'state', 'birthday', 'about']
+
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    return super().form_valid(form)
 
 class ProfileUpdate(UpdateView):
   pass
@@ -91,23 +99,22 @@ class ProfileUpdate(UpdateView):
 class ProfileDelete(DeleteView):
   pass
   
-
+# auth 
 def signup(request):
-    error_message = ''
-    if request.method == 'POST':
-        # This is how to create a 'user' form object
-        # that includes the data from the browser
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-        # This will add the user to the database
-            user = form.save()
-        # This is how we log a user in via code
-            login(request, user)
-            return redirect('home')
-        else:
-            error_message = 'Invalid sign up - try again'
-    # A bad POST or a GET request, so render signup.html with an empty form
-    form = UserCreationForm()
-    context = {'form': form, 'error_message': error_message}
-    return render(request, 'registration/signup.html', context)
-
+  error_message = ''
+  if request.method == 'POST':
+    # This is how to create a 'user' form object
+    # that includes the data from the browser
+    form = UserCreationForm(request.POST)
+    if form.is_valid():
+      # This will add the user to the database
+      user = form.save()
+      # This is how we log a user in via code
+      login(request, user)
+      return redirect('profiles_create')
+    else:
+      error_message = 'Invalid sign up - try again'
+  # A bad POST or a GET request, so render signup.html with an empty form
+  form = UserCreationForm()
+  context = {'form': form, 'error_message': error_message}
+  return render(request, 'registration/signup.html', context)

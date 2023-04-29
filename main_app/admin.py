@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Table, Item
+from .models import Table, Item, Profile
 
 
 class TableAdmin(admin.ModelAdmin):
@@ -8,3 +8,4 @@ class TableAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(Table)
 admin.site.register(Item)
+admin.site.register(Profile)
