@@ -1,0 +1,16 @@
+
+
+{% block content %}
+
+<form action="" method="POST">
+  {% csrf_token %}
+  <table>
+    {{form.as_table}}
+  </table>
+  <input type="submit" class="btn" value="Create Table">
+</form>
+
+
+
+
+{% endblock %}
