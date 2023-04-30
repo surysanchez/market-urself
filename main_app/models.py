@@ -70,7 +70,7 @@ class Item(models.Model):
         return f'{self.item_name}'
 
     def get_absolute_url(self):
-        return reverse('items_detail')
+        return reverse('items_detail', kwargs={'pk': self.id})
 
 
 class Order(models.Model):

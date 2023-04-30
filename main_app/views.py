@@ -47,7 +47,7 @@ class ItemCreate(CreateView):
 
 class ItemUpdate(UpdateView):
   model = Item
-  fields = '__all__'
+  fields = ['item_name', 'item_price','item_desciption']
 
 class ItemDelete(DeleteView):
   model = Item
