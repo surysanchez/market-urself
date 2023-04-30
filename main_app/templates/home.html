@@ -12,19 +12,38 @@
         <div class="input-field s3 border rounded">
           <i class="material-icons prefix">search</i>
           <input type="search" name="q" class="rounded boarder" placeholder="What are you looking for?">
-          <button type="submit">Search</button>
-          </label>
+          <!-- <button type="submit">Search</button> -->
         </div>
       </form>
     </div>
   </div>
 </div>
-
-
-
 <div class="container">
+
+{% if items %}
+{% for item in items %}
+
+<div class="row">
+  <div class="col s6 m3">
+    <div class="card square">
+      <div class="card-image">
+        <img src="static/images/misc.jpg">
+        <div class="card-content center-align">
+            <p>{{item.item_name}}</p>
+            <p>${{item.item_price}}</p>
+            <p>{{item.item_description}}</p>
+            <a href="/items/{{item.id}}">Link</a>
+          </div>
+        </div>
+      </div>
+  </div>
+  {% endfor %}
+  {% endif %}
+</div>
+
+<!-- <div class="container">
   <div class="row">
-    <div class="col s6">
+    <div class="col s3">
       <a href="static/images/misc.jpg">
         <div class="card square">
           <div class="card-image">
@@ -36,7 +55,7 @@
         </div>
       </a>
     </div>
-    <div class="col s6">
+    <div class="col s3">
       <a href="static/images/misc.jpg">
         <div class="card square">
           <div class="card-image">
@@ -48,8 +67,7 @@
         </div>
       </a>
     </div>
-  <div class="row">
-    <div class="col s6">
+    <div class="col s3">
       <a href="static/images/misc.jpg">
         <div class="card square">
           <div class="card-image">
@@ -61,7 +79,7 @@
         </div>
       </a>
     </div>
-    <div class="col s6">
+    <div class="col s3">
       <a href="static/images/misc.jpg">
         <div class="card square">
           <div class="card-image">
@@ -74,7 +92,7 @@
       </a>
     </div>
   <div class="row">
-    <div class="col s6">
+    <div class="col s3">
       <a href="static/images/misc.jpg">
         <div class="card square">
           <div class="card-image">
@@ -86,7 +104,7 @@
         </div>
       </a>
     </div>
-        <div class="col s6">
+        <div class="col s3">
       <a href="static/images/misc.jpg">
         <div class="card square">
           <div class="card-image">
@@ -98,5 +116,5 @@
         </div>
       </a>
     </div>
-</div>
+</div> -->
 {% endblock %}

@@ -4,15 +4,24 @@
 <h1>Search Results</h1>
 
 {% if results %}
-  <ul>
-  {% for result in results %}
-    <li>{{ result.item_name }}</li>
-    <li>{{ result.item_price }}</li>
-    <li>{{ result.item_description }}</li>
+{% for result in results %}
+
+<div class="row">
+  <div class="col s6 m3">
+    <div class="card square">
+      <div class="card-image">
+        <img src="static/images/misc.jpg">
+        <div class="card-content center-align">
+            <p>{{result.item_name}}</p>
+            <p>${{result.item_price}}</p>
+            <p>{{result.item_description}}</p>
+            <a href="/items/{{result.id}}">Link</a>
+          </div>
+        </div>
+      </div>
+  </div>
   {% endfor %}
-  </ul>
-{% else %}
-  <p>None</p>
-{% endif %}
+  {% endif %}
+</div>
 
 {% endblock %}

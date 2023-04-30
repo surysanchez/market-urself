@@ -46,4 +46,6 @@ urlpatterns = [
     path('homeables', views.category, name='category_detail'),
     path('gardenables', views.category, name='category_detail'),
     path('entertainables', views.category, name='category_detail'),
+    path('consumables', views.category, name='category_detail'),
+    path('miscellaneous', views.category, name='category_detail'),
 ]
