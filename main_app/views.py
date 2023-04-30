@@ -39,7 +39,7 @@ def profiles_detail(request):
 
 class ItemCreate(CreateView):
   model = Item
-  fields = ['table', 'item_name', 'item_price', 'item_description', 'categories']
+  fields = ['table', 'item_name', 'item_price', 'item_description', 'category']
 
   def form_valid(self, form):
     form.instance.user = self.request.user # set the user
