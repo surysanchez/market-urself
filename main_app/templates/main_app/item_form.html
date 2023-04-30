@@ -6,7 +6,6 @@
 {% else %}
 <h2>Add an Item</h2>
 {% endif %}
-
 <form action="" method="POST">
   {% csrf_token %}
   <table>
@@ -15,4 +14,8 @@
   <input type="submit" class="btn" value="Save">
 </form>
 
+<script>
+   const selectEl = document.getElementById('id_category');
+  M.FormSelect.init(selectEl);
+</script>
 {% endblock %}
