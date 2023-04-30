@@ -1,7 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<h1>{{ user.username }} Profile</h1>
 
-<h1>profiles/detail.html Page</h1>
+{{profile.first_name}}
+{{profile.last_name}}
+{{profile.address}}
+{{profile.city}}
+{{profile.table.id}}
+
+<h1>{{user.username}}'s Table Details</h1>
+<a href="{% url 'tables_create' %}" class="btn">Create a new table!</a>
+{% if table %}
+  <p>User Id: {{ table.user }}</p>
+  <p>Table ID: {{ table.id }}</p>
+  <a href="{% url 'tables_detail' table.id %}" class="btn" value="table number: {{table.id}}"></a>
+{% endif %}
 
 {% endblock %}
