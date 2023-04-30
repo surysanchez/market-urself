@@ -34,8 +34,13 @@ def tables_detail(request):
 
 def profiles_detail(request):
   profile = Profile.objects.get(user=request.user)
-  table = Profile.objects.get(user=request.user)
+  try:
+    table = Table.objects.get(user=request.user)
+  except:
+    table = None
+  
   return render(request, 'profiles/detail.html', {'profile': profile, 'table': table})
+  
 
 class ItemCreate(CreateView):
   model = Item

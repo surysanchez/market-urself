@@ -11,9 +11,9 @@
 
 <h1>{{user.username}}'s Table Details</h1>
 <a href="{% url 'tables_create' %}" class="btn">Create a new table!</a>
+<p>User Name: {{ profile.user.username }}</p>
+<p>Profile ID: {{ profile.id }}</p>
 {% if table %}
-  <p>User Id: {{ table.user }}</p>
-  <p>Table ID: {{ table.id }}</p>
   <a href="{% url 'tables_detail' table.id %}" class="btn" value="table number: {{table.id}}"></a>
 {% endif %}
 
