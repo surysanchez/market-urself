@@ -4,7 +4,7 @@ from django.views.generic import TemplateView, ListView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from .forms import TableForm, ItemForm
-from .models import Table, Item, Profile
+from .models import Table, Item, Profile, Order
 # from .models import Profile, Categories, Table, Photo, Item, Order, Review
 
 
@@ -47,6 +47,11 @@ def tables_detail(request, pk):
   items = Item.objects.filter(table=table)
   return render(request, 'main_app/table_detail.html', {'table': table, 'items': items})
 
+def category(request):
+  absPath = request.path
+  category = absPath.replace('/', '')
+  return render(request, 'category/detail.html', {'category': category})
+
 def profiles_detail(request):
   profile = Profile.objects.get(user=request.user)
   try:
@@ -73,6 +78,20 @@ class ItemUpdate(UpdateView):
 class ItemDelete(DeleteView):
   model = Item
   success_url = '/'
+
+## WORKING ON FUNCTION TO ADD ITEMS TO CART/still not working
+# def cart(request, items_pk):
+#   Order.objects.get(pk=items_pk).items.add(items_pk)
+#   return redirect('items', item_pk=items_pk)
+  
+# def cart(request, item_pk):
+#    form = ItemForm(request.POST)
+#   # validate the form
+#    if form.is_valid():
+#     new_item = form.save(commit=False)
+#     new_item.item_pk = item_pk
+#     new_item.save()
+#    return redirect('items/detail.html', item_pk=item_pk)
 
 
 class TableDetail(DetailView):

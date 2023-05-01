@@ -59,6 +59,7 @@ class Table(models.Model):
 
 class Item(models.Model):
     table = models.ForeignKey(Table, on_delete=models.CASCADE)
+
     # table = Table.objects.get(user)
     item_name = models.CharField(max_length=100)
     item_price = models.IntegerField(max_length=100)
