@@ -58,8 +58,8 @@ class Table(models.Model):
         return reverse('tables_update', kwargs={'pk': self.id})
 
 class Item(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     table = models.ForeignKey(Table, on_delete=models.CASCADE)
+    # table = Table.objects.get(user)
     item_name = models.CharField(max_length=100)
     item_price = models.IntegerField(max_length=100)
     item_description = models.TextField(max_length=1024, default='')
@@ -90,9 +90,9 @@ class Review(models.Model):
 
 class ItemPhoto(models.Model):
     url = models.CharField(max_length=200)    
-    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    # item = models.ForeignKey(Item, on_delete=models.CASCADE)
 
 
 class TablePhoto(models.Model):
     url = models.CharField(max_length=200)    
-    table = models.ForeignKey(Table, on_delete=models.CASCADE)
+    # table = models.ForeignKey(Table, on_delete=models.CASCADE)
