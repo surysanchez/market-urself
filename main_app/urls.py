@@ -38,8 +38,8 @@ urlpatterns = [
     # profile details
     path('profiles/details/', views.profiles_detail, name='profiles_detail'),
     path('profiles/create/', views.ProfileCreate.as_view(), name='profiles_create'), 
-    path('profiles/<int:profile_id>/update/', views.ProfileUpdate.as_view(), name='profiles_update'),
-    path('profiles/<int:profile_id>/delete/', views.ProfileDelete.as_view(), name='profiles_delete'),
+    path('profiles/<int:pk>/update/', views.ProfileUpdate.as_view(), name='profiles_update'),
+    path('profiles/<int:pk>/delete/', views.ProfileDelete.as_view(), name='profiles_delete'),
 
     #categories
     path('wearables', views.category, name='category_detail'),
