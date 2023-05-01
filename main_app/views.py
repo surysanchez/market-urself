@@ -28,7 +28,8 @@ def checkout(request):
 def category(request):
   absPath = request.path
   category = absPath.replace('/', '')
-  return render(request, 'category/detail.html', {'category': category})
+  items = Item.objects.filter(category = category)
+  return render(request, 'category/detail.html', {'category': category, 'items': items})
 
 def items_detail(request, pk):
   table = Table.objects.filter(user=request.user)

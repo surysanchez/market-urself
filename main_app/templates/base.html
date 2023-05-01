@@ -21,7 +21,6 @@
                 </ul>
                 <ul class="right">
                     {% if user.is_authenticated %}
-                    <li>{{ user }}</li>
                     {% endif %}
                     <li><a href="{% url 'about' %}">About</a></li>
                     <li><a href="{% url 'search' %}">Search</a></li>
@@ -35,12 +34,12 @@
                     {% endif %}
                 </ul>
             </div>
-            <div justifyContent="center" class="nav-content">
-                <ul>
-                    <li> <a href="/wearables">Wearables</a></li>
-                    <li> <a href="/homeables">Homeables</a></li>
-                    <li> <a href="/gardeables">Gardeables</a></li>
-                    <li> <a href="/entertainables">Entertainables</a></li>
+            <div class="nav-content center-align">
+                <ul class="tabs tabs-centered">
+                    <li class="tab"> <a href="/wearables"><i class="material-icons">watch</i>Wearables</a></li>
+                    <li class="tab"> <a href="/homeables"><i class="material-icons">home</i>Homeables</a></li>
+                    <li class="tab"> <a href="/gardenables"><i class="material-icons">local_florist</i>Gardenables</a></li>
+                    <li class="tab"> <a href="/entertainables"><i class="material-icons">videogame_asset</i>Entertainables</a></li>
                 </ul>
             </div>
         </nav>
