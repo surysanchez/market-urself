@@ -60,7 +60,7 @@ class ItemCreate(CreateView):
   success_url = '/profiles/details/'
 
   def form_valid(self, form):
-    form.instance.user = self.request.user # set the user
+    form.instance.table = Table.objects.get(user=self.request.user)
     return super().form_valid(form)
 
 class ItemUpdate(UpdateView):
