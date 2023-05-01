@@ -34,10 +34,10 @@ def items_detail(request):
   items = Item.objects.filter(table=table)
   return render(request, 'items/detail.html', {'items': items})
 
-def tables_detail(request):
-  table = Table.objects.filter(user=request.user)
+def tables_detail(request, pk):
+  table = Table.objects.get(id= pk)
   items = Item.objects.filter(table=table)
-  return render(request, 'tables/detail.html', {'table': table, 'items': items})
+  return render(request, 'main_app/table_detail.html', {'table': table, 'items': items})
 
 def category(request):
   absPath = request.path
