@@ -5,6 +5,7 @@ urlpatterns = [
     # django sign up
     path('accounts/signup/', views.signup, name='signup'),
 
+
     # home / landing page
     path('', views.home, name='home'),
 
@@ -28,7 +29,7 @@ urlpatterns = [
 
     # table details
     path('tables/', views.tables_detail, name='tables_detail'),
-    path('tables/<int:pk>/', views.TableDetail.as_view(), name='tables_detail'),
+    path('tables/<int:pk>/', views.tables_detail, name='tables_detail'),
     path('tables/create/', views.TableCreate.as_view(), name='tables_create'),
     path('tables/<int:pk>/update/', views.TableUpdate.as_view(), name='tables_update'),
     path('tables/<int:pk>/delete/', views.TableDelete.as_view(), name='tables_delete'),
