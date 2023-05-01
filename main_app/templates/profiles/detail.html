@@ -7,7 +7,8 @@
 {{profile.last_name}}
 {{profile.address}}
 {{profile.city}}
-{{profile.table.id}}
+{{profile.id}}
+<a href="{% url 'profiles_update' profile.id %}">Update</a>
 
 <h1>{{user.username}}'s Table Details</h1>
 

@@ -3,12 +3,16 @@
 {% block content %}
 <h1>Search Results</h1>
 
-<ul>
-  {% for table in object_list %}
-  <li>
-    {{ table.table_name}}, {{ table }}
-  </li>
+{% if results %}
+  <ul>
+  {% for result in results %}
+    <li>{{ result.item_name }}</li>
+    <li>{{ result.item_price }}</li>
+    <li>{{ result.item_description }}</li>
   {% endfor %}
-</ul>
+  </ul>
+{% else %}
+  <p>None</p>
+{% endif %}
 
 {% endblock %}

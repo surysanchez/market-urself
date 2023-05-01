@@ -17,7 +17,13 @@ def about(request):
   return render(request, 'about.html')
 
 def search(request):
-  return render(request, 'search.html')
+  # query = Item.objects.get(item_name='Pot2')
+  query2 = request.GET.get('q')
+  # print(query2)
+  # print(request.GET)
+  results = Item.objects.filter(item_name__contains=query2)
+  
+  return render(request, 'search.html', {'results':results})
 
 def cart(request):
   return render(request, 'cart.html')
@@ -67,7 +73,7 @@ class ItemCreate(CreateView):
 
 class ItemUpdate(UpdateView):
   model = Item
-  fields = ['item_name', 'item_price','item_desciption']
+  fields = ['item_name', 'item_price','item_description']
 
 class ItemDelete(DeleteView):
   model = Item
@@ -122,7 +128,7 @@ class ProfileCreate(CreateView):
 
 class ProfileUpdate(UpdateView):
   model = Profile
-  fields = ['first_name', 'address']
+  fields = ['first_name', 'last_name', 'address']
 
 class ProfileDelete(DeleteView):
   pass
