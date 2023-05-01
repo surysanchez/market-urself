@@ -10,7 +10,7 @@ CATEGORIES = (
     ('consumables', 'Consumables'),
     ('homeables', 'Homeables'),
     ('gardenables', 'Gardenables'),
-    ('entertainmentables', 'Entertainables'),
+    ('entertainables', 'Entertainables'),
 )
 
 TAGS = (
