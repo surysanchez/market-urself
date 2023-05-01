@@ -10,11 +10,23 @@
 {{profile.table.id}}
 
 <h1>{{user.username}}'s Table Details</h1>
-<a href="{% url 'tables_create' %}" class="btn">Create a new table!</a>
+
 <p>User Name: {{ profile.user.username }}</p>
 <p>Profile ID: {{ profile.id }}</p>
 {% if table %}
-  <a href="{% url 'tables_detail' table.id %}" class="btn" value="table number: {{table.id}}"></a>
+<a href="{% url 'tables_detail' table.id %}">
+  <div class="card" >
+    <div class="card-content">
+      <p class="card-title">Table: {{ table.table_name }}</p>
+    </div>
+    <div class="card-action">
+      <a href="{% url 'tables_update' table.id %}">Edit</a>
+      <a href="{% url 'tables_delete' table.id %}">Delete</a>
+    </div>
+  </div>
+</a>
+{% else %}
+  <a href="{% url 'tables_create' %}" class="btn">Create a new table!</a>
 {% endif %}
 
 {% endblock %}

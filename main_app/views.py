@@ -25,12 +25,14 @@ def checkout(request):
   return render(request, 'checkout.html')
 
 def items_detail(request):
-  items = Item.objects.filter(user=request.user)
+  table = Table.objects.filter(user=request.user)
+  items = Item.objects.filter(table=table)
   return render(request, 'items/detail.html', {'items': items})
 
 def tables_detail(request):
-  tables = Table.objects.filter(user=request.user)
-  return render(request, 'tables/detail.html', {'tables': tables})
+  table = Table.objects.filter(user=request.user)
+  items = Item.objects.filter(table=table)
+  return render(request, 'tables/detail.html', {'table': table, 'items': items})
 
 def profiles_detail(request):
   profile = Profile.objects.get(user=request.user)
@@ -44,7 +46,9 @@ def profiles_detail(request):
 
 class ItemCreate(CreateView):
   model = Item
-  fields = ['table', 'item_name', 'item_price', 'item_description', 'category']
+  table = Table.objects.all()
+  fields = ['item_name', 'item_price', 'item_description', 'category']
+  success_url = '/profiles/details/'
 
   def form_valid(self, form):
     form.instance.user = self.request.user # set the user
