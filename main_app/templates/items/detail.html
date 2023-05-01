@@ -4,22 +4,19 @@
 <h1>Item Details</h1>
 
 
-<a class="btn light blue" href="{% url 'items_create' %}">Create a new item!</a>
      
 <div class="row">
   <div class="col s6">
     <div class="card">
       <div class="card-content" class="'flow-text">
-        {% for item in items%}
-
-  <p>Item User: {{ item.user }}</p>
-  <!-- <p>Item ID: {{ item.id }}</p> -->
-  <p>Item Table: {{ item.table }}</p>
-  <p>Item Name: {{ item.item_name }}</p>
-  <p>Item Description: {{ item.item_description }}</p>
-  <p>Item Categories: {{ item.category }}</p>
-{% endfor %}
-
+        <p>Item Table: {{ item.table }}</p>
+        <p>Item Name: {{ item.item_name }}</p>
+        <p>Item Description: {{ item.item_description }}</p>
+        <p>Item Categories: {{ item.category }}</p>
+      </div>
+      <div class="card-action">
+        <a href="{% url 'items_update' item.id %}" class="waves-effect waves-light btn-small">Edit</a>
+        <a href="{% url 'items_delete' item.id %}" class="waves-effect waves-light btn-small">Delete</a>
       </div>
     </div>
   </div>
