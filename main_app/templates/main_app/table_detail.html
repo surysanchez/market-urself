@@ -2,11 +2,12 @@
 {% block content %}
 
 <h1>{{table.table_name}}'s Table Details</h1>
-<a class="btn light blue" href="{% url 'items_create' %}">Create a new item!</a>
-{% if items %}
 {% for item in items %}
   <p>{{item.item_name}}</p>
 {% endfor %}
+<a class="btn light blue" href="{% url 'items_create' %}">Create a new item!</a>
+{% if items %}
+
 {% else %}
 <p>No items yet</p>
 {% endif %}
