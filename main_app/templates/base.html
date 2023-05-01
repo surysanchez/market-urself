@@ -14,7 +14,7 @@
 </head>
 <body>
     <header class="navbar-fixed">
-        <nav>
+        <nav class="nav-extended">
             <div class="nav-wrapper">
                 <ul>
                     <li><a href="{% url 'home' %}" class="left brand-logo">&nbsp;&nbsp;Market Urself</a></li>
@@ -26,8 +26,6 @@
                     <li><a href="{% url 'about' %}">About</a></li>
                     <li><a href="{% url 'search' %}">Search</a></li>
                     <li><a href="{% url 'cart' %}">Cart</a></li>
-                    <li><a href="{% url 'tables_detail' %}">Table</a></li>
-                    <li><a href="{% url 'items_detail' %}">Items</a></li>
                     {% if user.is_authenticated %}
                     <li><a href="{% url 'profiles_detail' %}">Profile</a></li>
                     <li><a href="{% url 'logout' %}">Logout</a></li>
@@ -37,7 +35,16 @@
                     {% endif %}
                 </ul>
             </div>
+            <div class="nav-content">
+                <ul>
+                    <li> <a href="">Wearables</a></li>
+                    <li> <a href="">Homeables</a></li>
+                    <li> <a href="">Gardeables</a></li>
+                    <li> <a href="">Entertables</a></li>
+                </ul>
+            </div>
         </nav>
+        
     </header>
     <main class="container">
         {% block content %}
