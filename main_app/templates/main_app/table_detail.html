@@ -4,9 +4,15 @@
 <h1>{{table.table_name}}'s Table Details</h1>
 <a class="btn light blue" href="{% url 'items_create' %}">Create a new item!</a>
 {% if items %}
-{% for item in items %}
+  {% for item in items %}
+<a href="{% url 'items_detail' item.id %}">
+<div class="card">
+  <div class="card-content">
   <p>{{item.item_name}}</p>
-{% endfor %}
+  </div>
+</div>
+</a>
+  {% endfor %}
 {% else %}
 <p>No items yet</p>
 {% endif %}

@@ -23,6 +23,7 @@ urlpatterns = [
 
     # item details
     path('items/', views.items_detail, name='items_detail'),
+    path('items/<int:pk>/', views.items_detail, name='items_detail'),    
     path('items/create/', views.ItemCreate.as_view(), name='items_create'),
     path('items/<int:pk>/update/', views.ItemUpdate.as_view(), name='items_update'),
     path('items/<int:pk>/delete/', views.ItemDelete.as_view(), name='items_delete'),
