@@ -24,6 +24,11 @@ def cart(request):
 def checkout(request):
   return render(request, 'checkout.html')
 
+def category(request):
+  absPath = request.path
+  category = absPath.replace('/', '')
+  return render(request, 'category/detail.html', {'category': category})
+
 def items_detail(request):
   table = Table.objects.filter(user=request.user)
   items = Item.objects.filter(table=table)
@@ -51,13 +56,11 @@ def profiles_detail(request):
 
 class ItemCreate(CreateView):
   model = Item
-  table = Table.objects.all()
   fields = ['item_name', 'item_price', 'item_description', 'category']
   success_url = '/profiles/details/'
 
   def form_valid(self, form):
     form.instance.user = self.request.user # set the user
-    form.instance.table = Table.objects.get(user=self.request.user)
     return super().form_valid(form)
 
 class ItemUpdate(UpdateView):
