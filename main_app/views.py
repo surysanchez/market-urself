@@ -7,6 +7,7 @@ from .forms import TableForm, ItemForm
 from .models import Table, Item, Profile
 # from .models import Profile, Categories, Table, Photo, Item, Order, Review
 
+
 # Create your views here.
 
 def home(request):
@@ -29,10 +30,10 @@ def category(request):
   category = absPath.replace('/', '')
   return render(request, 'category/detail.html', {'category': category})
 
-def items_detail(request):
+def items_detail(request, pk):
   table = Table.objects.filter(user=request.user)
-  items = Item.objects.filter(table=table)
-  return render(request, 'items/detail.html', {'items': items})
+  item = Item.objects.get(id=pk)
+  return render(request, 'items/detail.html', {'item': item})
 
 def tables_detail(request, pk):
   table = Table.objects.get(id= pk)
@@ -69,7 +70,8 @@ class ItemUpdate(UpdateView):
 
 class ItemDelete(DeleteView):
   model = Item
-  success_url = '/tables/tables_details.html'
+  success_url = '/'
+
 
 class TableDetail(DetailView):
   model = Table
