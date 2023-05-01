@@ -5,6 +5,7 @@ urlpatterns = [
     # django sign up
     path('accounts/signup/', views.signup, name='signup'),
 
+
     # home / landing page
     path('', views.home, name='home'),
 
