@@ -44,6 +44,6 @@ urlpatterns = [
     #categories
     path('wearables', views.category, name='category_detail'),
     path('homeables', views.category, name='category_detail'),
-    path('gardeables', views.category, name='category_detail'),
+    path('gardenables', views.category, name='category_detail'),
     path('entertainables', views.category, name='category_detail'),
 ]

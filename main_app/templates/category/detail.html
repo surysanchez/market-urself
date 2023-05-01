@@ -1,8 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 <h1>{{category}}</h1>
+{% if items %}
+    {% for item in items %}
+    <p>{{item.item_name}}</p>
+    {% endfor %}
+{% else %}
+<p>none</p>
+{% endif %}
+
 
 
 {% endblock %}
