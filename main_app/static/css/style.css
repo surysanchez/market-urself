@@ -11,3 +11,29 @@ nav {
 .page-footer {
   background-color: var(--primary-color);
 }
+
+.container {
+  width: 90%;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.nav-content a {
+  color: black;
+}
+
+.nav-content i.material-icons {
+  color: var(--primary-color);
+}
+
+#lower a {
+  color: var(--primary-color);
+}

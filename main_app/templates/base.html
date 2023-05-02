@@ -13,37 +13,51 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body>
-    <header class="navbar-fixed">
+    <header class="navbar">
         <nav class="nav-extended">
             <div class="nav-wrapper">
                 <ul>
                     <li><a href="{% url 'home' %}" class="left brand-logo">&nbsp;&nbsp;Market Urself</a></li>
                 </ul>
                 <ul class="right">
+                    <li><form action="{% url 'search' %}" method="GET">
+                    <input type="search" name="q" class="rounded boarder" placeholder="Find it local">
+                    </form></li>
+                    <li><i type="" class="material-icons prefix">search</i></li>
                     {% if user.is_authenticated %}
                     {% endif %}
-                    <li><a href="{% url 'about' %}">About</a></li>
-                    <li><a href="{% url 'search' %}">Search</a></li>
-                    <li><a href="{% url 'cart' %}">Cart</a></li>
+                    <!-- <li><a href="{% url 'search' %}">Search</a></li> -->
                     {% if user.is_authenticated %}
-                    <li><a href="{% url 'profiles_detail' %}">Profile</a></li>
+                    <li><a href="{% url 'profiles_detail' %}"><i class="material-icons">account_circle</i></a></li>
                     <li><a href="{% url 'logout' %}">Logout</a></li>
                     {% else %}
                     <li><a href="/accounts/login/">Sign in</a></li>
                     <li><a href="{% url 'signup' %}">Create Account</a></li>
                     {% endif %}
+                    <li><a href="{% url 'cart' %}"><i class="material-icons">shopping_cart</i></a></li>
                 </ul>
             </div>
             <div class="nav-content center-align">
-                <ul class="tabs tabs-centered">
-                    <li class="tab"> <a href="/wearables"><i class="material-icons">watch</i>Wearables</a></li>
+                <ul class="tabs tabs-fixed-width center-align">
+                    <li class="tab" data-tooltip="Wearables"> <a href="/wearables"><i class="material-icons">watch</i><br>Wearables</a></li>
+                    <li class="tab"> <a href="/consumables"><i class="material-icons">free_breakfast</i>Consumables</a></li>
                     <li class="tab"> <a href="/homeables"><i class="material-icons">home</i>Homeables</a></li>
                     <li class="tab"> <a href="/gardenables"><i class="material-icons">local_florist</i>Gardenables</a></li>
                     <li class="tab"> <a href="/entertainables"><i class="material-icons">videogame_asset</i>Entertainables</a></li>
+                    <li class="tab"> <a href="/miscellaneous"><i class="material-icons">more_vert</i>Miscellaneous</a></li>
+                </ul>
+            </div>
+            <div class="nav-content center-align">
+                <ul class="tabs tabs-fixed-width center-align">
+                    <li class="tab" id="lower"> <a href="/wearables">Wearables</a></li>
+                    <li class="tab" id="lower"> <a href="/consumables">Consumables</a></li>
+                    <li class="tab" id="lower"> <a href="/homeables">Homeables</a></li>
+                    <li class="tab" id="lower"> <a href="/gardenables">Gardenables</a></li>
+                    <li class="tab" id="lower"> <a href="/entertainables">Entertainables</a></li>
+                    <li class="tab" id="lower"> <a href="/miscellaneous">Miscellaneous</a></li>
                 </ul>
             </div>
         </nav>
-        
     </header>
     <main class="container">
         {% block content %}
@@ -52,6 +66,7 @@
     </main>
     <footer class="page-footer">
         <div class="right">All Rights Reserved, &copy; 2023 Market Urself &nbsp;</div>
+        <a href="{% url 'about' %}">About</a>
     </footer>
 </body>
 </html>
