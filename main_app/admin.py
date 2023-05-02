@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Table, Item, Profile
+from .models import Table, Item, Profile, Cart, CartItem
 
 
 class TableAdmin(admin.ModelAdmin):
@@ -9,3 +9,5 @@ class TableAdmin(admin.ModelAdmin):
 admin.site.register(Table)
 admin.site.register(Item)
 admin.site.register(Profile)
+admin.site.register(Cart)
+admin.site.register(CartItem)
