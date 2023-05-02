@@ -47,6 +47,7 @@ class Table(models.Model):
         choices=CATEGORIES,
         default=CATEGORIES[0][0]
         )
+    image = models.FileField(upload_to='table_images/')
 
     def __str__(self):
         return self.table_name
@@ -69,6 +70,7 @@ class Item(models.Model):
         default=TAGS[0][0]
         )
 
+
     def __str__(self):
         return f'{self.item_name}'
 
@@ -86,14 +88,14 @@ class Review(models.Model):
     item_review = models.TextField(max_length=1024)
 
 
-class ItemPhoto(models.Model):
-    url = models.CharField(max_length=200)    
-    # item = models.ForeignKey(Item, on_delete=models.CASCADE)
+# class ItemPhoto(models.Model):
+#     url = models.CharField(max_length=200)    
+#     # item = models.ForeignKey(Item, on_delete=models.CASCADE)
 
 
-class TablePhoto(models.Model):
-    url = models.CharField(max_length=200)    
-    # table = models.ForeignKey(Table, on_delete=models.CASCADE)
+# class TablePhoto(models.Model):
+#     url = models.CharField(max_length=200)    
+#     # table = models.ForeignKey(Table, on_delete=models.CASCADE)
 
 
 class Checkout(models.Model):
