@@ -3,6 +3,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import TemplateView, ListView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import TableForm, ItemForm
 from .models import Table, Item, Profile, Order
 # from .models import Profile, Categories, Table, Photo, Item, Order, Review
@@ -39,9 +40,13 @@ def category(request):
   return render(request, 'category/detail.html', {'category': category, 'items': items})
 
 def items_detail(request, pk):
-  table = Table.objects.filter(user=request.user)
   item = Item.objects.get(id=pk)
-  return render(request, 'items/detail.html', {'item': item})
+  is_user = False
+  if item.table.user == request.user:
+    is_user = True
+  else:
+    is_user = False
+  return render(request, 'items/detail.html', {'item': item, 'is_user':is_user})
 
 def tables_detail(request, pk):
   table = Table.objects.get(id= pk)
@@ -54,24 +59,24 @@ def profiles_detail(request):
     table = Table.objects.get(user=request.user)
   except:
     table = None
-  
   return render(request, 'profiles/detail.html', {'profile': profile, 'table': table})
   
 
 class ItemCreate(CreateView):
   model = Item
-  fields = ['item_name', 'item_price', 'item_description', 'category']
+  fields = ['item_name', 'item_price', 'item_description', 'category', 'image']
   success_url = '/profiles/details/'
 
   def form_valid(self, form):
     form.instance.table = Table.objects.get(user=self.request.user)
     return super().form_valid(form)
 
-class ItemUpdate(UpdateView):
-  model = Item
-  fields = ['item_name', 'item_price','item_description']
 
-class ItemDelete(DeleteView):
+class ItemUpdate(LoginRequiredMixin, UpdateView):
+  model = Item
+  fields = ['item_name', 'item_price','item_description', 'image']
+
+class ItemDelete(LoginRequiredMixin, DeleteView):
   model = Item
   success_url = '/'
 
@@ -94,21 +99,21 @@ class TableDetail(DetailView):
   model = Table
 
 
-class TableCreate(CreateView):
+class TableCreate(LoginRequiredMixin, CreateView):
   model = Table
-  fields = ['table_name', 'table_description', 'table_category']
+  fields = ['table_name', 'table_description', 'table_category', 'image']
   success_url = '/profiles/details/'
 
   def form_valid(self, form):
     form.instance.user = self.request.user
     return super().form_valid(form)
   
-class TableUpdate(UpdateView):
+class TableUpdate(LoginRequiredMixin, UpdateView):
   model = Table
-  fields = ['table_name', 'table_description', 'table_category']
+  fields = ['table_name', 'table_description', 'table_category', 'image']
   success_url = '/profiles/details/'
   
-class TableDelete(DeleteView):
+class TableDelete(LoginRequiredMixin, DeleteView):
   model = Table
   success_url = '/'
 

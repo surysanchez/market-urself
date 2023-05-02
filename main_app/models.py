@@ -47,7 +47,7 @@ class Table(models.Model):
         choices=CATEGORIES,
         default=CATEGORIES[0][0]
         )
-    image = models.FileField(upload_to='table_images/')
+    image = models.FileField(upload_to='table_images/', blank=True)
 
     def __str__(self):
         return self.table_name
@@ -69,6 +69,7 @@ class Item(models.Model):
         choices=TAGS,
         default=TAGS[0][0]
         )
+    image = models.FileField(upload_to='item_images/', blank=True)
 
 
     def __str__(self):
