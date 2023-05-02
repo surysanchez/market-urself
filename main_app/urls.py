@@ -40,6 +40,12 @@ urlpatterns = [
     path('profiles/create/', views.ProfileCreate.as_view(), name='profiles_create'), 
     path('profiles/<int:pk>/update/', views.ProfileUpdate.as_view(), name='profiles_update'),
     path('profiles/<int:pk>/delete/', views.ProfileDelete.as_view(), name='profiles_delete'),
+    
+    # managers details
+    path('managers/detail/', views.managers_detail, name='managers_detail'),
+    path('managers/create/', views.ManagerCreate.as_view(), name='managers_create'), 
+    path('managers/<int:pk>/update/', views.ManagerUpdate.as_view(), name='managers_update'),
+    path('managers/<int:pk>/delete/', views.ManagerDelete.as_view(), name='managers_delete'),
 
     #categories
     path('wearables', views.category, name='category_detail'),

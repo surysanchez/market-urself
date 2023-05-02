@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Edit Your Table Details</h1>
+
+<a class="btn light blue" href="{% url 'tables_create' %}">Create a new table!</a>
+<div class="row">
+  <div class="col s6">
+    <div class="card">
+      {% for table in tables %}
+      <div class="card-content">
+        <p>Table User: {{ table.user }}</p>
+    <!-- <p>Table ID: {{ table.id }}</p> -->
+    <p>Table Name: {{ table.table_name }}</p>
+    <p>Table Description: {{ table.table_description }}</p>
+    <p>Table Categories: {{ table.table_category }}</p>
+  {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

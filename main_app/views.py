@@ -48,11 +48,6 @@ def tables_detail(request, pk):
   items = Item.objects.filter(table=table)
   return render(request, 'main_app/table_detail.html', {'table': table, 'items': items})
 
-def category(request):
-  absPath = request.path
-  category = absPath.replace('/', '')
-  return render(request, 'category/detail.html', {'category': category})
-
 def profiles_detail(request):
   profile = Profile.objects.get(user=request.user)
   try:
@@ -147,7 +142,32 @@ class ProfileUpdate(UpdateView):
 
 class ProfileDelete(DeleteView):
   pass
+
+
+class ManagerCreate(CreateView):
+  model = Profile
+  fields = ['first_name', 'last_name', 'address', 'city', 'zip', 'state', 'birthday', 'about']
+
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    return super().form_valid(form)
+
+class ManagerUpdate(UpdateView):
+  model = Profile
+  fields = ['first_name', 'last_name', 'address']
+
+class ManagerDelete(DeleteView):
+  pass
   
+def managers_detail(request):
+  profile = Profile.objects.get(user=request.user)
+  try:
+    table = Table.objects.get(user=request.user)
+  except:
+    table = None
+  return render(request, 'managers/detail.html', {'profile': profile, 'table': table})
+  
+
 # auth 
 def signup(request):
   error_message = ''

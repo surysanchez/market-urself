@@ -59,8 +59,7 @@ class Table(models.Model):
 
 class Item(models.Model):
     table = models.ForeignKey(Table, on_delete=models.CASCADE)
-
-    # table = Table.objects.get(user)
+    # cart = models.ForeignKey(Cart)
     item_name = models.CharField(max_length=100)
     item_price = models.IntegerField(max_length=100)
     item_description = models.TextField(max_length=1024, default='')
@@ -80,8 +79,6 @@ class Item(models.Model):
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     item =  models.ForeignKey(Item, on_delete=models.CASCADE)
-    date = models.DateField()
-    # Shipping Address?
 
 
 class Review(models.Model):
@@ -97,3 +94,9 @@ class ItemPhoto(models.Model):
 class TablePhoto(models.Model):
     url = models.CharField(max_length=200)    
     # table = models.ForeignKey(Table, on_delete=models.CASCADE)
+
+
+class Checkout(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    item =  models.ForeignKey(Item, on_delete=models.CASCADE)
+    date = models.DateField()
