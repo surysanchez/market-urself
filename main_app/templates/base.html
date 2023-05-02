@@ -20,15 +20,19 @@
                     <li><a href="{% url 'home' %}" class="left brand-logo">&nbsp;&nbsp;Market Urself</a></li>
                 </ul>
                 <ul class="right">
-                    <li><form action="{% url 'search' %}" method="GET">
-                    <input type="search" name="q" class="rounded boarder" placeholder="Find it local">
-                    </form></li>
-                    <li><i type="" class="material-icons prefix">search</i></li>
+                    <li>
+                        <form action="{% url 'search' %}" method="GET">
+                            <input type="search" name="q" class="rounded boarder" placeholder="Find it local">
+                        </form>
+                    </li>
+                    <li>
+                        <i type="" class="material-icons prefix">search</i>
+                    </li>
                     {% if user.is_authenticated %}
                     {% endif %}
                     <!-- <li><a href="{% url 'search' %}">Search</a></li> -->
                     {% if user.is_authenticated %}
-                    <li><a href="{% url 'managers_detail' %}"><i class="material-icons">cake</i></a></li>
+                    <li><a href="{% url 'managers_detail' %}"><i class="material-icons">storefront</i></a></li>
                     <li><a href="{% url 'profiles_detail' %}"><i class="material-icons">account_circle</i></a></li>
                     <li><a href="{% url 'logout' %}">Logout</a></li>
                     {% else %}

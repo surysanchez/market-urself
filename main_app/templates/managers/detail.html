@@ -3,7 +3,6 @@
 {% block content %}
 <h1>Edit Your Table Details</h1>
 
-<a class="btn light blue" href="{% url 'tables_create' %}">Create a new table!</a>
 <div class="row">
   <div class="col s6">
     <div class="card">
@@ -19,5 +18,22 @@
     </div>
   </div>
 </div>
+<img src="/media/{{ table.image }}" class="materialboxed" width="250" height="250">
+
+{% if table %}
+<a href="{% url 'tables_detail' table.id %}">
+  <div class="card" >
+    <div class="card-content">
+      <p class="card-title">Table: {{ table.table_name }}</p>
+    </div>
+    <div class="card-action">
+      <a href="{% url 'tables_update' table.id %}">Edit</a>
+      <a href="{% url 'tables_delete' table.id %}">Delete</a>
+    </div>
+  </div>
+</a>
+{% else %}
+  <a href="{% url 'tables_create' %}" class="btn">Create a new table!</a>
+{% endif %}
 
 {% endblock %}

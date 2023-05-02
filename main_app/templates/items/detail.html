@@ -7,6 +7,9 @@
   <div class="col s6">
     <div class="card">
       <div class="card-content">
+        {% if item.image %}
+        <img src="/media/{{item.image}}" height="100" width="100" class="materialboxed">
+        {% endif %}
         <p>Item Table: {{ item.table }}</p>
         <p>Item Name: {{ item.item_name }}</p>
         <p>Item Description: {{ item.item_description }}</p>
@@ -18,13 +21,15 @@
         </p> 
         <input type="submit" class="btn light blue" value="Add to Cart"></input>
       </form>
+      {% if is_user %}
       <div class="card-action">
         <a href="{% url 'items_update' item.id %}" class="waves-effect waves-light btn-small">Edit</a>
         <a href="{% url 'items_delete' item.id %}" class="waves-effect waves-light btn-small">Delete</a>
       </div>
+      {% endif %}
     </div>
     </div>
   </div>
 </div>
-   
+
 {% endblock %}
