@@ -60,17 +60,14 @@ class Table(models.Model):
 
 class Item(models.Model):
     table = models.ForeignKey(Table, on_delete=models.CASCADE)
-    # cart = models.ForeignKey(Cart)
     item_name = models.CharField(max_length=100)
     item_price = models.IntegerField(max_length=100)
     item_description = models.TextField(max_length=1024, default='')
-    # item_picture = models.ForeignKey(Photo, on_delete=models.CASCADE)
     category = models.CharField(
         choices=TAGS,
         default=TAGS[0][0]
         )
     image = models.FileField(upload_to='item_images/', blank=True)
-
 
     def __str__(self):
         return f'{self.item_name}'
@@ -78,25 +75,18 @@ class Item(models.Model):
     def get_absolute_url(self):
         return reverse('items_detail', kwargs={'pk': self.id})
 
+class CartItem(models.Model):
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    quantity = models.IntegerField(max_length=5, default=1)
 
-class Order(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    item =  models.ForeignKey(Item, on_delete=models.CASCADE)
+class Cart(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    cartItem = models.ManyToManyField(CartItem)
 
 
 class Review(models.Model):
     item_rating = models.IntegerField(max_length=5)
     item_review = models.TextField(max_length=1024)
-
-
-# class ItemPhoto(models.Model):
-#     url = models.CharField(max_length=200)    
-#     # item = models.ForeignKey(Item, on_delete=models.CASCADE)
-
-
-# class TablePhoto(models.Model):
-#     url = models.CharField(max_length=200)    
-#     # table = models.ForeignKey(Table, on_delete=models.CASCADE)
 
 
 class Checkout(models.Model):
