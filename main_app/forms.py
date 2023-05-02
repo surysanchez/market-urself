@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 
-from .models import Table, Item, Profile
+from .models import Table, Item, Profile, Review
 
 class TableForm(ModelForm):
     class Meta: 
@@ -16,3 +16,8 @@ class ProfileForm(ModelForm):
     class Meta: 
         model = Profile
         fields = '__all__'
+
+
+class ReviewForm(ModelForm):
+    class Meta:
+        fields = ['user', 'item_rating', 'comment']

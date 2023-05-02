@@ -4,8 +4,8 @@ from django.views.generic import TemplateView, ListView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import TableForm, ItemForm
-from .models import Table, Item, Profile, Order
+from .forms import TableForm, ItemForm, ReviewForm
+from .models import Table, Item, Profile, Order, Review
 # from .models import Profile, Categories, Table, Photo, Item, Order, Review
 
 
@@ -38,6 +38,7 @@ def category(request):
   category = absPath.replace('/', '')
   items = Item.objects.filter(category = category)
   return render(request, 'category/detail.html', {'category': category, 'items': items})
+
 
 def items_detail(request, pk):
   item = Item.objects.get(id=pk)
@@ -192,3 +193,38 @@ def signup(request):
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
+
+def items_review(request, id):
+  post = Item.objects.get(id=id)
+  form = ReviewForm(request.POST or None)
+  if form.is_valid():
+    user = request.POST.get('user')
+    item_rating = request.POST.get('item_rating')
+    comment = request.POST.get('comment')
+    review = Review(user=user, item_rating=item_rating, comment=comment, item=post)
+    review.save()
+    return redirect('success')
+  
+  form = ReviewForm()
+  context = {
+    "form":form
+  }
+  return render(request, 'items_reviews.html',context )
+def success(request):
+  return render(request, '/')
+
+## Item Reviews WIP
+# class ReviewsList(TemplateView):
+#   model = Review 
+
+# class ReviewsDetail(ListView):
+#   model = Review
+ 
+# class ReviewsCreate(CreateView):
+#   model = Review 
+#   fields = '__all__'
+#   success_url = '/items/details/'
+
+# class ReviewsDelete(DeleteView):
+#   model = Review 
+#   success_url = '/'
