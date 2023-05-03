@@ -17,6 +17,7 @@ urlpatterns = [
 
     # shopping cart
     path('cart/', views.cart, name='cart'),
+    path('cartitems/create/', views.CartItemCreate.as_view(), name='cart_items_create'),
 
     # checkout
     path('checkout/', views.checkout, name='checkout'),

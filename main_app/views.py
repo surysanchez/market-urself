@@ -4,8 +4,9 @@ from django.views.generic import TemplateView, ListView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import TableForm, ItemForm, ReviewForm
-from .models import Table, Item, Profile, Order, Review
+from .forms import TableForm, ItemForm
+from .models import Table, Item, Profile, Cart, CartItem, Review
+
 # from .models import Profile, Categories, Table, Photo, Item, Order, Review
 
 
@@ -28,7 +29,9 @@ def search(request):
   return render(request, 'search.html', {'results':results})
 
 def cart(request):
-  return render(request, 'cart.html')
+  cart = Cart.objects.get(user=request.user)
+  items = CartItem.objects.filter(cart = cart)
+  return render(request, 'cart.html', {'cart': cart, 'items': items})
   
 def checkout(request):
   return render(request, 'checkout.html')
@@ -42,6 +45,8 @@ def category(request):
 
 def items_detail(request, pk):
   item = Item.objects.get(id=pk)
+  request.session['cur_item'] = item.item_name
+  print('test: ',request.session['cur_item'])
   is_user = False
   if item.table.user == request.user:
     is_user = True
@@ -71,6 +76,21 @@ class ItemCreate(CreateView):
   def form_valid(self, form):
     form.instance.table = Table.objects.get(user=self.request.user)
     return super().form_valid(form)
+
+class CartItemCreate(CreateView):
+  model = CartItem
+  fields = '__all__'
+  success_url = '/'
+  def form_valid(self, form):
+    # item = 
+    item = Item.objects.get(item_name = self.request.session['cur_item'])
+    form.item = item
+    form.quantity = 1
+    print('idiot ')
+    print(item)
+    return super().form_valid(form)
+
+  # form_valid(x, y)
 
 
 class ItemUpdate(LoginRequiredMixin, UpdateView):
