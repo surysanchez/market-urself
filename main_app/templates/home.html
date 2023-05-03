@@ -18,103 +18,28 @@
     </div>
   </div>
 </div>
+
 <div class="container">
-
-{% if items %}
-{% for item in items %}
-
-<div class="row">
-  <div class="col s6 m3">
-    <div class="card square">
-      <div class="card-image">
-        <img src="static/images/misc.jpg">
-        <div class="card-content center-align">
-            <p>{{item.item_name}}</p>
-            <p>${{item.item_price}}</p>
-            <p>{{item.item_description}}</p>
-            <a href="/items/{{item.id}}">Link</a>
-          </div>
-        </div>
-      </div>
+  <div class="row">
+    <div class="col s6 m3">
+      {% if items %}
+        {% for item in items %}
+          <a href="/items/{{item.id}}">
+            <div class="card square">
+              <div class="card-image">
+                <img src="static/images/misc.jpg">
+                <div class="card-content center-align">
+                  <p>{{item.item_name}}</p>
+                  <p>${{item.item_price}}</p>
+                  <p>{{item.item_description}}</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+      {% endif %}
+    </div>
   </div>
-  {% endfor %}
-  {% endif %}
 </div>
 
-<!-- <div class="container">
-  <div class="row">
-    <div class="col s3">
-      <a href="static/images/misc.jpg">
-        <div class="card square">
-          <div class="card-image">
-            <img src="static/images/misc.jpg">
-              <div class="card-content center-align">
-                <p>WEARABLES</p>
-            </div>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="col s3">
-      <a href="static/images/misc.jpg">
-        <div class="card square">
-          <div class="card-image">
-          <img src="static/images/misc.jpg">
-            <div class="card-content center-align">
-            <p>CONSUMABLES</p>
-            </div>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="col s3">
-      <a href="static/images/misc.jpg">
-        <div class="card square">
-          <div class="card-image">
-            <img src="static/images/misc.jpg">
-            <div class="card-content center-align">
-              <p>HOMEABLES</p>
-              </div>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="col s3">
-      <a href="static/images/misc.jpg">
-        <div class="card square">
-          <div class="card-image">
-            <img src="static/images/misc.jpg">
-            <div class="card-content center-align">
-              <p>GARDENABLES</p>
-              </div>
-          </div>
-        </div>
-      </a>
-    </div>
-  <div class="row">
-    <div class="col s3">
-      <a href="static/images/misc.jpg">
-        <div class="card square">
-          <div class="card-image">
-            <img src="static/images/misc.jpg">
-            <div class="card-content center-align">
-              <p>ENTERTAINABLES</p>
-              </div>
-          </div>
-        </div>
-      </a>
-    </div>
-        <div class="col s3">
-      <a href="static/images/misc.jpg">
-        <div class="card square">
-          <div class="card-image">
-            <img src="static/images/misc.jpg">
-            <div class="card-content center-align">
-              <p>MISCELLANEOUS</p>
-              </div>
-          </div>
-        </div>
-      </a>
-    </div>
-</div> -->
 {% endblock %}

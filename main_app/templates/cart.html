@@ -3,12 +3,17 @@
 {% block content %}
 <h1>Cart Page</h1>
 {% if cart %}
-<p>found cart</p>
-    {% for item in items %}
-    <h3>{{ item.name }}</h3>
-    {% endfor %}
+    {% if items %}
+        {% for item in items %}
+            <h3>{{ item.item.item_name }}</h3>
+            <h4>Quantity: {{ item.quantity }}</h4>
+        {% endfor %}
+    {% else %}
+        <h3>No items in cart yet</h3>
+    {% endif %}
 {% else %}
-does not exist
+<h3>does not exist</h3>
 {% endif %}
 <a href="{% url 'checkout' %}">Checkout</a>
+
 {% endblock %}

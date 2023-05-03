@@ -20,11 +20,8 @@ def about(request):
   return render(request, 'about.html')
 
 def search(request):
-  # query = Item.objects.get(item_name='Pot2')
   query2 = request.GET.get('q')
-  # print(query2)
-  # print(request.GET)
-  results = Item.objects.filter(item_name__contains=query2)
+  results = Item.objects.filter(item_name__icontains=query2)
   
   return render(request, 'search.html', {'results':results})
 
@@ -79,19 +76,14 @@ class ItemCreate(CreateView):
 
 class CartItemCreate(CreateView):
   model = CartItem
-  fields = '__all__'
-  success_url = '/'
+  fields = ['quantity']
+  success_url = '/cart/'
+
   def form_valid(self, form):
-    # item = 
-    item = Item.objects.get(item_name = self.request.session['cur_item'])
-    form.item = item
-    form.quantity = 1
-    print('idiot ')
-    print(item)
+    form.instance.cart = Cart.objects.get(user=self.request.user)
+    cur_name = self.request.session['cur_item']
+    form.instance.item = Item.objects.get(item_name=cur_name)
     return super().form_valid(form)
-
-  # form_valid(x, y)
-
 
 class ItemUpdate(LoginRequiredMixin, UpdateView):
   model = Item
