@@ -17,7 +17,7 @@ class ProfileForm(ModelForm):
         model = Profile
         fields = '__all__'
 
-
 class ReviewForm(ModelForm):
     class Meta:
-        fields = ['user', 'item_rating', 'comment']
+        model = Review
+        fields = [ 'item_rating', 'comment']

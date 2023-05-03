@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-from .models import Table, Item, Profile, Cart, CartItem, Review
-
+from .models import Table, Item, Profile, Review, Cart, CartItem
 
 
 class TableAdmin(admin.ModelAdmin):

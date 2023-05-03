@@ -30,13 +30,10 @@ urlpatterns = [
     path('items/<int:pk>/delete/', views.ItemDelete.as_view(), name='items_delete'),
 
     #items reviews
-      path('items_review/<int:id>', views.items_review, name='items_review'),
-    ## items review draft
-    # path('reviews/', views.ReviewsList.as_view(), name='reviews_item'),
-    # path('reviews/<int:pk>', views.ReviewsDetail.as_view(), name='reviews_detail'),
-    # path('reviews/create/', views.ReviewsCreate.as_view(), name='reviews_create'),
-    # path('reviews/<int:pk>/update/', views.ReviewsUpdate.as_view() , name='reviews_update'),
-    # path('reviews/<int:pk>/delete/', views.ReviewsDelete.as_view(), name='reviews_delete'),
+    path('reviews/', views.ReviewsList.as_view(), name='reviews_item'),
+    path('reviews/<int:pk>', views.ReviewsDetail.as_view(), name='reviews_detail'),
+    path('reviews/create/', views.ReviewsCreate.as_view(), name='reviews_create'),
+    path('reviews/<int:pk>/delete/', views.ReviewsDelete.as_view(), name='reviews_delete'),
 
    
     # table details

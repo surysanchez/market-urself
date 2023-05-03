@@ -37,19 +37,32 @@
   </div>
 </div>
 
+
+{% if is_user %}
 <h1>Reviews</h1>
 <div class="row">
   <div class="col s6 col-offset-3">
+    {%if reviews %}
+    
+    {% for review in reviews %}
     <div class="card">
       <div class="card-content">
-        <p> User:{{review.user}}</p>
-        <p>Rating: {{ item_rating }}</p>
-        <p>Comment: {{ item_review }}</p>
-      </div>
-      </div>
-      <a  class="btn" href="items_reviews.html">Add Review</a>
+       <p>{{ review.user.name }}</p>
+      <p>{{ review.item_rating }}</p>
+      <p>{{ review.comment }}</p>
+    <p class="right-align"><a href="{% url 'reviews_delete' review.id %}"><i class="material-icons">delete</i></a></p>
+
+    </div>
+  </div>
+  {% endfor %}
+  {% else %}
+  <p>No Reviews Yet</p>
+  {% endif %}
+  <a  class="btn" href="{% url 'reviews_create' %}">Add Review</a>
+
     </div>
   </div>
 </div>
+{% endif %}
 
 {% endblock %}
