@@ -85,9 +85,18 @@ class Cart(models.Model):
 
 
 class Review(models.Model):
-    item_rating = models.IntegerField(max_length=5)
-    item_review = models.TextField(max_length=1024)
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    item =  models.ForeignKey(Item, on_delete=models.CASCADE)
+    # item_rating = models.IntegerField(max_length=5)
+    rating_choices = (
+        (1, 1),
+        (2, 2),
+        (3, 3),
+        (4, 4),
+        (5, 5)
+    )
+    item_rating = models.IntegerField(choices=rating_choices)
+    comment = models.TextField(max_length=4000)
 
 class Checkout(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
