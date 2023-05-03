@@ -68,10 +68,11 @@ def profiles_detail(request):
 class ItemCreate(CreateView):
   model = Item
   fields = ['item_name', 'item_price', 'item_description', 'category', 'image']
-  success_url = '/profiles/details/'
 
   def form_valid(self, form):
-    form.instance.table = Table.objects.get(user=self.request.user)
+    table = Table.objects.get(user=self.request.user)
+    form.instance.table = table
+    # success_url = '/tables/{table.id}/'
     return super().form_valid(form)
 
 class CartItemCreate(CreateView):
@@ -84,6 +85,10 @@ class CartItemCreate(CreateView):
     cur_name = self.request.session['cur_item']
     form.instance.item = Item.objects.get(item_name=cur_name)
     return super().form_valid(form)
+
+class CartItemDelete(LoginRequiredMixin, DeleteView):
+  model = CartItem
+  success_url = '/'
 
 class ItemUpdate(LoginRequiredMixin, UpdateView):
   model = Item
@@ -101,7 +106,7 @@ class TableDetail(DetailView):
 class TableCreate(LoginRequiredMixin, CreateView):
   model = Table
   fields = ['table_name', 'table_description', 'table_category', 'image']
-  success_url = '/profiles/details/'
+  success_url = '/managers/detail/'
 
   def form_valid(self, form):
     form.instance.user = self.request.user
@@ -110,11 +115,11 @@ class TableCreate(LoginRequiredMixin, CreateView):
 class TableUpdate(LoginRequiredMixin, UpdateView):
   model = Table
   fields = ['table_name', 'table_description', 'table_category', 'image']
-  success_url = '/profiles/details/'
+  success_url = '/managers/detail/'
   
 class TableDelete(LoginRequiredMixin, DeleteView):
   model = Table
-  success_url = '/'
+  success_url = '/managers/detail/'
 
 # Public profile details view
 # def profiles_detail(request):
