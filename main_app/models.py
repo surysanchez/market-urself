@@ -82,30 +82,25 @@ class Item(models.Model):
     def get_absolute_url(self):
         return reverse('items_detail', kwargs={'pk': self.id})
 
-class CartItem(models.Model):
-    item = models.ForeignKey(Item, on_delete=models.CASCADE)
-    quantity = models.IntegerField(max_length=5, default=1)
-
 class Cart(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    cartItem = models.ManyToManyField(CartItem)
 
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    quantity = models.IntegerField(max_length=5, default=1)
 
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     item =  models.ForeignKey(Item, on_delete=models.CASCADE)
-    # item_rating = models.IntegerField(max_length=5)
-
-    item_rating = models.CharField(max_length=1,
-     choices=RATING_CHOICES, 
-     default=RATING_CHOICES[0][0])
+    item_rating = models.CharField(
+        max_length=1,
+        choices=RATING_CHOICES, 
+        default=RATING_CHOICES[0][0])
     comment = models.TextField(max_length=4000)
 
     def __str__(self):
         return f'{self.user}'
-
-    # def get_absolute_url(self):
-    #     return reverse('items_review', kwargs={'pk': self.id})
 
 class Checkout(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
