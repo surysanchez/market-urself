@@ -37,7 +37,7 @@
             <p>{{ review.user.name }}</p>
             <p>{{ review.item_rating }}</p>
             <p>{{ review.comment }}</p>
-            {% if is_user %}
+            {% if not is_user %}
               <p class="right-align"><a href="{% url 'reviews_delete' review.id %}"><i class="material-icons">delete</i></a></p>
             {% endif %}
           </div>

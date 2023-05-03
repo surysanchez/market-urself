@@ -19,7 +19,7 @@ TAGS = (
     ('consumables', 'Consumables'),
     ('homeables', 'Homeables'),
     ('gardenables', 'Gardenables'),
-    ('entertainmentables', 'Entertainables'),
+    ('entertainables', 'Entertainables'),
 )
 RATING_CHOICES = (
         ('1', 1),
@@ -83,11 +83,11 @@ class Item(models.Model):
         return reverse('items_detail', kwargs={'pk': self.id})
 
 class Cart(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default='')
 
 class CartItem(models.Model):
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
-    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, default='')
+    item = models.ForeignKey(Item, on_delete=models.CASCADE, default='')
     quantity = models.IntegerField(max_length=5, default=1)
 
 class Review(models.Model):

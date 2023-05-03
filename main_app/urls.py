@@ -18,6 +18,8 @@ urlpatterns = [
     # shopping cart
     path('cart/', views.cart, name='cart'),
     path('cartitems/create/', views.CartItemCreate.as_view(), name='cart_items_create'),
+    path('cartitems/<int:pk>/delete/', views.CartItemDelete.as_view(), name='cart_item_delete'),
+
 
     # checkout
     path('checkout/', views.checkout, name='checkout'),
@@ -37,7 +39,6 @@ urlpatterns = [
 
    
     # table details
-    path('tables/', views.tables_detail, name='tables_detail'),
     path('tables/<int:pk>/', views.tables_detail, name='tables_detail'),
     path('tables/create/', views.TableCreate.as_view(), name='tables_create'),
     path('tables/<int:pk>/update/', views.TableUpdate.as_view(), name='tables_update'),
