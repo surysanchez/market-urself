@@ -6,6 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import TableForm, ItemForm, ReviewForm
 from .models import Table, Item, Profile, Cart, CartItem, Review
+
 # from .models import Profile, Categories, Table, Photo, Item, Order, Review
 
 
@@ -199,24 +200,13 @@ def signup(request):
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
 
+
 ## Item Reviews WIP
 class ReviewsList(TemplateView):
   model = Review 
 
 class ReviewsDetail(ListView):
   model = Review
- 
-
-# def items_review(request, id):
-#   post = Item.objects.get(id=id)
-#   form = ReviewForm(request.POST or None)
-#   if form.is_valid():
-#     user = request.POST.get('user')
-#     item_rating = request.POST.get('item_rating')
-#     comment = request.POST.get('comment')
-#     review = Review(user=user, item_rating=item_rating, comment=comment, item=post)
-#     review.save()
-#     return redirect('success')
   
 class ReviewsCreate(CreateView):
   model = Review 
@@ -232,3 +222,4 @@ class ReviewsCreate(CreateView):
 class ReviewsDelete(DeleteView):
   model = Review 
   success_url = '/'
+

@@ -95,6 +95,7 @@ class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     item =  models.ForeignKey(Item, on_delete=models.CASCADE)
     # item_rating = models.IntegerField(max_length=5)
+
     item_rating = models.CharField(max_length=1,
      choices=RATING_CHOICES, 
      default=RATING_CHOICES[0][0])
@@ -110,5 +111,3 @@ class Checkout(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     item =  models.ForeignKey(Item, on_delete=models.CASCADE)
     date = models.DateField()
-
-    
