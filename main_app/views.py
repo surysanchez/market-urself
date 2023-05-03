@@ -5,7 +5,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import TableForm, ItemForm, ReviewForm
-from .models import Table, Item, Profile, Order, Review
+from .models import Table, Item, Profile, Cart, CartItem, Review
 # from .models import Profile, Categories, Table, Photo, Item, Order, Review
 
 
@@ -28,7 +28,9 @@ def search(request):
   return render(request, 'search.html', {'results':results})
 
 def cart(request):
-  return render(request, 'cart.html')
+  cart = Cart.objects.get(user=request.user)
+  items = CartItem.objects.filter(cart = cart)
+  return render(request, 'cart.html', {'cart': cart, 'items': items})
   
 def checkout(request):
   return render(request, 'checkout.html')
@@ -42,12 +44,14 @@ def category(request):
 
 def items_detail(request, pk):
   item = Item.objects.get(id=pk)
+  request.session['cur_item'] = item.item_name
+  reviews = Review.objects.filter(item=item)
   is_user = False
   if item.table.user == request.user:
     is_user = True
   else:
     is_user = False
-  return render(request, 'items/detail.html', {'item': item, 'is_user':is_user})
+  return render(request, 'items/detail.html', {'item': item, 'is_user':is_user, 'reviews':reviews})
 
 def tables_detail(request, pk):
   table = Table.objects.get(id= pk)
@@ -72,28 +76,29 @@ class ItemCreate(CreateView):
     form.instance.table = Table.objects.get(user=self.request.user)
     return super().form_valid(form)
 
+class CartItemCreate(CreateView):
+  model = CartItem
+  fields = '__all__'
+  success_url = '/'
+  def form_valid(self, form):
+    # item = 
+    item = Item.objects.get(item_name = self.request.session['cur_item'])
+    form.item = item
+    form.quantity = 1
+    print('idiot ')
+    print(item)
+    return super().form_valid(form)
+
+  # form_valid(x, y)
+
 
 class ItemUpdate(LoginRequiredMixin, UpdateView):
   model = Item
-  fields = ['item_name', 'item_price','item_description', 'image']
+  fields = ['item_name', 'item_price','item_description', 'image', 'category']
 
 class ItemDelete(LoginRequiredMixin, DeleteView):
   model = Item
   success_url = '/'
-
-## WORKING ON FUNCTION TO ADD ITEMS TO CART/still not working
-# def cart(request, items_pk):
-#   Order.objects.get(pk=items_pk).items.add(items_pk)
-#   return redirect('items', item_pk=items_pk)
-  
-# def cart(request, item_pk):
-#    form = ItemForm(request.POST)
-#   # validate the form
-#    if form.is_valid():
-#     new_item = form.save(commit=False)
-#     new_item.item_pk = item_pk
-#     new_item.save()
-#    return redirect('items/detail.html', item_pk=item_pk)
 
 
 class TableDetail(DetailView):
@@ -194,37 +199,36 @@ def signup(request):
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
 
-def items_review(request, id):
-  post = Item.objects.get(id=id)
-  form = ReviewForm(request.POST or None)
-  if form.is_valid():
-    user = request.POST.get('user')
-    item_rating = request.POST.get('item_rating')
-    comment = request.POST.get('comment')
-    review = Review(user=user, item_rating=item_rating, comment=comment, item=post)
-    review.save()
-    return redirect('success')
-  
-  form = ReviewForm()
-  context = {
-    "form":form
-  }
-  return render(request, 'items_reviews.html',context )
-def success(request):
-  return render(request, '/')
-
 ## Item Reviews WIP
-# class ReviewsList(TemplateView):
-#   model = Review 
+class ReviewsList(TemplateView):
+  model = Review 
 
-# class ReviewsDetail(ListView):
-#   model = Review
+class ReviewsDetail(ListView):
+  model = Review
  
-# class ReviewsCreate(CreateView):
-#   model = Review 
-#   fields = '__all__'
-#   success_url = '/items/details/'
 
-# class ReviewsDelete(DeleteView):
-#   model = Review 
-#   success_url = '/'
+# def items_review(request, id):
+#   post = Item.objects.get(id=id)
+#   form = ReviewForm(request.POST or None)
+#   if form.is_valid():
+#     user = request.POST.get('user')
+#     item_rating = request.POST.get('item_rating')
+#     comment = request.POST.get('comment')
+#     review = Review(user=user, item_rating=item_rating, comment=comment, item=post)
+#     review.save()
+#     return redirect('success')
+  
+class ReviewsCreate(CreateView):
+  model = Review 
+  fields = ['item_rating', 'comment']
+  success_url = '/'
+ 
+
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    form.instance.item = Item.objects.get(item_name=self.request.session['cur_item'] )
+    return super().form_valid(form)
+  
+class ReviewsDelete(DeleteView):
+  model = Review 
+  success_url = '/'
