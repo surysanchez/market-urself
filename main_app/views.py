@@ -83,7 +83,11 @@ def profiles_detail(request, pk):
     table = None
     
   return render(request, 'profiles/detail.html', {'profile': profile, 'table': table, 'is_user':is_user})
-  
+
+def clear_cart(request):
+  cart = Cart.objects.get(user=request.user)
+  CartItem.objects.filter(cart = cart).delete()
+  return redirect('/')
 
 class ItemCreate(CreateView):
   model = Item
@@ -189,7 +193,8 @@ def managers_detail(request):
     table = Table.objects.get(user=request.user)
   except:
     table = None
-  return render(request, 'managers/detail.html', {'profile': profile, 'table': table})
+  items = Item.objects.filter(table=table)
+  return render(request, 'managers/detail.html', {'profile': profile, 'table': table, 'items': items})
   
 
 # auth 
