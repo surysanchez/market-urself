@@ -86,24 +86,24 @@ WSGI_APPLICATION = 'marketurself.wsgi.application'
 
 DATABASES = {
     # This is to work locally
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'marketurself',
-    # }
-    # This is to deploy with bit.io and Heroku
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        # bit.io Database name
-        'NAME': 'curtis-salcedo/maindatabase',
-        # bit.io Username
-        'USER': os.environ['BITUSER'],
-        # bit.io API Key / Password
-        'PASSWORD': os.environ['BITPASSWORD'],
-        # bit.io Hostname
-        'HOST': 'db.bit.io',
-        # bit.io Port
-        'PORT': '5432',
+        'NAME': 'marketurself',
     }
+    # This is to deploy with bit.io and Heroku
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     # bit.io Database name
+    #     'NAME': 'curtis-salcedo/maindatabase',
+    #     # bit.io Username
+    #     'USER': os.environ['BITUSER'],
+    #     # bit.io API Key / Password
+    #     'PASSWORD': os.environ['BITPASSWORD'],
+    #     # bit.io Hostname
+    #     'HOST': 'db.bit.io',
+    #     # bit.io Port
+    #     'PORT': '5432',
+    # }
 }
 
 
