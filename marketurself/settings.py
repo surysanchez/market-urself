@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 import environ
-
 environ.Env()
 environ.Env.read_env()
 
@@ -86,9 +85,24 @@ WSGI_APPLICATION = 'marketurself.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
+    # This is to work locally
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'marketurself',
+    # }
+    # This is to deploy with bit.io and Heroku
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'marketurself',
+        # bit.io Database name
+        'NAME': os.environ.get['BITDB'],
+        # bit.io Username
+        'USER': os.environ.get['BITUSER'],
+        # bit.io API Key / Password
+        'PASSWORD': os.environ.get['BITPASSWORD'],
+        # bit.io Hostname
+        'HOST': 'db.bit.io',
+        # bit.io Port
+        'PORT': '5432',
     }
 }
 
