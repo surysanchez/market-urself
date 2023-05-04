@@ -33,7 +33,7 @@
                     <!-- <li><a href="{% url 'search' %}">Search</a></li> -->
                     {% if user.is_authenticated %}
                     <li><a href="{% url 'managers_detail' %}"><i class="material-icons">storefront</i></a></li>
-                    <li><a href="{% url 'profiles_detail' %}"><i class="material-icons">account_circle</i></a></li>
+                    <li><a href="{% url 'profiles_detail' user.id %}"><i class="material-icons">account_circle</i></a></li>
                     <li><a href="{% url 'logout' %}">Logout</a></li>
                     {% else %}
                     <li><a href="/accounts/login/">Sign in</a></li>
