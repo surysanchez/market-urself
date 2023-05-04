@@ -94,7 +94,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         # bit.io Database name
-        'NAME': 'curtis-salcedo',
+        'NAME': 'curtis-salcedo/maindatabase',
         # bit.io Username
         'USER': os.environ['BITUSER'],
         # bit.io API Key / Password
