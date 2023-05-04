@@ -5,7 +5,11 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from .forms import TableForm, ItemForm, ReviewForm
 from .models import Table, Item, Profile, Cart, CartItem, Review
+
+# from .models import Profile, Categories, Table, Photo, Item, Order, Review
+
 
 # Create your views here.
 
@@ -19,16 +23,15 @@ def about(request):
 def search(request):
   query2 = request.GET.get('q')
   results = Item.objects.filter(item_name__icontains=query2)
-  searchedVal = query2
-  return render(request, 'search.html', {'results':results, 'searchedVal':searchedVal})
+  
+  return render(request, 'search.html', {'results':results})
 
 @login_required
 def cart(request):
   cart = Cart.objects.get(user=request.user)
   items = CartItem.objects.filter(cart = cart)
   return render(request, 'cart.html', {'cart': cart, 'items': items})
-
-@login_required
+  
 def checkout(request):
   return render(request, 'checkout.html')
 
@@ -37,6 +40,7 @@ def category(request):
   category = absPath.replace('/', '')
   items = Item.objects.filter(category = category)
   return render(request, 'category/detail.html', {'category': category, 'items': items})
+
 
 def items_detail(request, pk):
   item = Item.objects.get(id=pk)
@@ -57,7 +61,7 @@ def items_detail(request, pk):
 def tables_detail(request, pk):
   table = Table.objects.get(id= pk)
   items = Item.objects.filter(table=table)
-  return render(request, 'tables/detail.html', {'table': table, 'items': items})
+  return render(request, 'main_app/table_detail.html', {'table': table, 'items': items})
 
 def profiles_detail(request, pk):
   profile = Profile.objects.get(id=pk)
@@ -66,7 +70,7 @@ def profiles_detail(request, pk):
   else:
     is_user = False
   try:
-    table = Table.objects.get(user=profile.user)
+    table = Table.objects.get(user=request.user)
   except:
     table = None
   return render(request, 'profiles/detail.html', {'profile': profile, 'table': table, 'is_user':is_user})
@@ -85,7 +89,6 @@ class ItemCreate(CreateView):
     form.instance.table = table
     # success_url = '/tables/{table.id}/'
     return super().form_valid(form)
-
 
 class CartItemCreate(CreateView):
   model = CartItem
@@ -123,18 +126,31 @@ class TableCreate(LoginRequiredMixin, CreateView):
   def form_valid(self, form):
     form.instance.user = self.request.user
     return super().form_valid(form)
-
-
+  
 class TableUpdate(LoginRequiredMixin, UpdateView):
   model = Table
   fields = ['table_name', 'table_description', 'table_category', 'image']
   success_url = '/managers/detail/'
   
-
 class TableDelete(LoginRequiredMixin, DeleteView):
   model = Table
   success_url = '/managers/detail/'
 
+# Public profile details view
+# def profiles_detail(request):
+#   return render(request, 'profiles/detail', )
+  # profile = Profile.objects.get('profile_id': profile_id)
+  # # Need to identify what "username" is by connecting profile_id to it's user
+  # if request.user.username == username:
+  #   pass
+  #   return render(request, 'profiles/detail.html')
+  # else:
+  #   return render(request, 'different.html')
+
+## DON'T USE THIS AT THIS POINT
+# Private user profile view
+# def users_detail(request, profile_id):
+#   return render(request, 'users/detail.html')
 
 class ProfileCreate(CreateView):
   model = Profile
@@ -144,11 +160,9 @@ class ProfileCreate(CreateView):
     form.instance.user = self.request.user
     return super().form_valid(form)
 
-
 class ProfileUpdate(UpdateView):
   model = Profile
   fields = ['first_name', 'last_name', 'address']
-
 
 class ProfileDelete(DeleteView):
   pass
@@ -158,21 +172,17 @@ class ManagerCreate(CreateView):
   model = Profile
   fields = ['first_name', 'last_name', 'address', 'city', 'zip', 'state', 'birthday', 'about']
 
-
   def form_valid(self, form):
     form.instance.user = self.request.user
     return super().form_valid(form)
-
 
 class ManagerUpdate(UpdateView):
   model = Profile
   fields = ['first_name', 'last_name', 'address']
 
-
 class ManagerDelete(DeleteView):
   pass
-
-
+  
 def managers_detail(request):
   profile = Profile.objects.get(user=request.user)
   try:
@@ -208,22 +218,20 @@ def signup(request):
 class ReviewsList(TemplateView):
   model = Review 
 
-
 class ReviewsDetail(ListView):
   model = Review
-
-
+  
 class ReviewsCreate(CreateView):
   model = Review 
   fields = ['item_rating', 'comment']
   success_url = '/'
-
+ 
 
   def form_valid(self, form):
     form.instance.user = self.request.user
     form.instance.item = Item.objects.get(item_name=self.request.session['cur_item'] )
     return super().form_valid(form)
-
+  
 class ReviewsDelete(DeleteView):
   model = Review 
   success_url = '/'

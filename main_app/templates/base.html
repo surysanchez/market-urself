@@ -30,24 +30,16 @@
                     </li>
                     {% if user.is_authenticated %}
                     {% endif %}
+                    <!-- <li><a href="{% url 'search' %}">Search</a></li> -->
                     {% if user.is_authenticated %}
                     <li><a href="{% url 'managers_detail' %}"><i class="material-icons">storefront</i></a></li>
-                    <ul class="right hide-on-med-and-down">
-                        <li>
-                            <a class="dropdown-trigger" href="#!" data-target="dropdown1">
-                                <!-- <i class="material-icons">arrow_drop_down</i> -->
-                                <i class="material-icons">account_circle</i>
-                            </a>
-                        </li>
-                    </ul>
+                    <li><a href="{% url 'profiles_detail' user.id %}"><i class="material-icons">account_circle</i></a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
                     {% else %}
                     <li><a href="/accounts/login/">Sign in</a></li>
                     <li><a href="{% url 'signup' %}">Create Account</a></li>
                     {% endif %}
                     <li><a href="{% url 'cart' %}"><i class="material-icons">shopping_cart</i></a></li>
-                    {% if user.cartitems %}
-                    {{cart}}
-                    {% endif %}
                 </ul>
             </div>
             <div class="nav-content center-align">
@@ -73,29 +65,13 @@
         </nav>
     </header>
     <main class="container">
-
         {% block content %}
         {% endblock %}
-
+        
     </main>
     <footer class="page-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col s6">
-                    <h5 class="white-text center-align">About Us</h5>
-                    <p class="grey-text text-lighten-4">Our platform offers a unique shopping experience where you can discover and purchase locally sourced products, including food, goods, entertainment, and home items.</p>
-                </div>
-                <div class="col s6">
-                    <h5 class="white-text center-align">Mission</h5>
-                    <p class="grey-text text-lighten-4">Our mission is to support local businesses and promote sustainable practices by connecting consumers with high-quality, locally sourced products. By prioritizing local sourcing and production, we aim to keep money circulating in the local economy and reduce the environmental impact of transportation and packaging.</p>
-                </div>
-            </div>
-        </div>
-        <div class="footer-copyright">
-            <div class="container">
-                <div class="right">All Rights Reserved, &copy; 2023 Market Urself &nbsp;</div>
-            </div>
-        </div>
+        <div class="right">All Rights Reserved, &copy; 2023 Market Urself &nbsp;</div>
+        <a href="{% url 'about' %}">About</a>
     </footer>
 </body>
 </html>
@@ -103,7 +79,7 @@
 
 <ul id="dropdown1" class="dropdown-content">
     <li>Logged in as {{user.username}}</li>
-    <li><a href="{% url 'profiles_detail' user.id %}">My Profile</a></li>
+    <li><a href="/profiles/details/">My Profile</a></li>
     <li><a href="/managers/detail/">My Table</a></li>
     <li><a href="/accounts/logout/">Logout</a></li>
 </ul>

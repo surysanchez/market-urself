@@ -1,8 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<h1>{{ user.username }}'s Profile</h1>
 
+<p>Fist Name: {{profile.first_name}}</p>
+<p>Last Name: {{profile.last_name}}</p>
+<p>Address: {{profile.address}}</p>
+<p>City: {{profile.city}}</p>
 {% if is_user %}
+<<<<<<< HEAD
 <h3>Your Account</h3>
 {% endif %}
 <div class="container">
@@ -47,4 +53,8 @@
   </div>
 </div>
 
+=======
+<a href="{% url 'profiles_update' profile.id %}">Update</a>
+{% endif %}
+>>>>>>> parent of 01585e7 (CSS and Materialize framework styling)
 {% endblock %}
