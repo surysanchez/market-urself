@@ -189,7 +189,8 @@ def managers_detail(request):
     table = Table.objects.get(user=request.user)
   except:
     table = None
-  return render(request, 'managers/detail.html', {'profile': profile, 'table': table})
+  items = Item.objects.filter(table=table)
+  return render(request, 'managers/detail.html', {'profile': profile, 'table': table, 'items': items})
   
 
 # auth 
