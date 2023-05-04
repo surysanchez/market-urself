@@ -4,6 +4,7 @@ from django.views.generic import TemplateView, ListView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from .forms import TableForm, ItemForm, ReviewForm
 from .models import Table, Item, Profile, Cart, CartItem, Review
 
@@ -25,6 +26,7 @@ def search(request):
   
   return render(request, 'search.html', {'results':results})
 
+@login_required
 def cart(request):
   cart = Cart.objects.get(user=request.user)
   items = CartItem.objects.filter(cart = cart)
@@ -44,25 +46,34 @@ def items_detail(request, pk):
   item = Item.objects.get(id=pk)
   request.session['cur_item'] = item.item_name
   reviews = Review.objects.filter(item=item)
+  if request.user.is_authenticated:
+    userA = True
+  else:
+    userA = False
+  print(request.user)
   is_user = False
   if item.table.user == request.user:
     is_user = True
   else:
     is_user = False
-  return render(request, 'items/detail.html', {'item': item, 'is_user':is_user, 'reviews':reviews})
+  return render(request, 'items/detail.html', {'item': item, 'is_user':is_user, 'reviews':reviews, 'userA':userA})
 
 def tables_detail(request, pk):
   table = Table.objects.get(id= pk)
   items = Item.objects.filter(table=table)
   return render(request, 'main_app/table_detail.html', {'table': table, 'items': items})
 
-def profiles_detail(request):
-  profile = Profile.objects.get(user=request.user)
+def profiles_detail(request, pk):
+  profile = Profile.objects.get(id=pk)
+  if profile.user == request.user:
+    is_user = True
+  else:
+    is_user = False
   try:
     table = Table.objects.get(user=request.user)
   except:
     table = None
-  return render(request, 'profiles/detail.html', {'profile': profile, 'table': table})
+  return render(request, 'profiles/detail.html', {'profile': profile, 'table': table, 'is_user':is_user})
   
 
 class ItemCreate(CreateView):

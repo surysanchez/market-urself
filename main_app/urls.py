@@ -45,7 +45,7 @@ urlpatterns = [
     path('tables/<int:pk>/delete/', views.TableDelete.as_view(), name='tables_delete'),
 
     # profile details
-    path('profiles/details/', views.profiles_detail, name='profiles_detail'),
+    path('profiles/<int:pk>/', views.profiles_detail, name='profiles_detail'),
     path('profiles/create/', views.ProfileCreate.as_view(), name='profiles_create'), 
     path('profiles/<int:pk>/update/', views.ProfileUpdate.as_view(), name='profiles_update'),
     path('profiles/<int:pk>/delete/', views.ProfileDelete.as_view(), name='profiles_delete'),
