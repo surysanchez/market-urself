@@ -2,75 +2,32 @@
 
 {% block content %}
 
-<h1>{{table.table_name}}'s Table Details</h1>
-  <p>Owner: <a href="{% url 'profiles_detail' table.user.id %}">{{table.user}}</a></p>
-  <a class="btn light blue" href="{% url 'items_create' %}">Create a new item!</a>
-  {% if items %}
-    {% for item in items %}
-      <a href="{% url 'items_detail' item.id %}">
-        <div class=“card”>
-          <div class=“card-content”>
-          <p>{{item.item_name}}</p>
-          </div>
-        </div>
-      </a>
-    {% endfor %}
-  {% else %}
-    <p>No items yet</p>
-  {% endif %}
+<h1>{{table.table_name}}</h1>
+<p>Owner: <a href="{% url 'profiles_detail' table.user.id %}">{{table.user}}</a></p>
+<h5>{{table.table_category}}</h5>
+<h5>{{table.table_description}}</h5>
 
-
-  <h1>Table Details</h1>
-  
-  <a class="btn light blue" href="{% url 'tables_create' %}">Create a new table!</a>
-  <div class="row">
-    <div class="col s6">
-      <div class="card">
-        {% for table in tables %}
-        <div class="card-content">
-          <p>Table User: {{ table.user }}</p>
-      <!-- <p>Table ID: {{ table.id }}</p> -->
-      <p>Table Name: {{ table.table_name }}</p>
-      <p>Table Description: {{ table.table_description }}</p>
-      <p>Table Categories: {{ table.table_category }}</p>
-    {% endfor %}
-        </div>
-      </div>
-    </div>
-  </div>
-  <h1>{{table.table_name}}'s Table Details</h1>
-
-  <div class="row">
-  <div class="col s3">
-    <a href="{% url 'items_create' %}">
-      <div class="card square">
-        <div class="card-content center-align">
-          <p class="card-title">Add Item</p>
-          <i class="material-icons large">add_circle</i>
-        </div>
-      </a>
-    </div>
-  </div>
   {% if items %}
   {% for item in items %}
   
   <div class="row">
     <div class="col s6 m3">
-      <div class="card square">
-        <div class="card-image">
-          <img src="https://via.placeholder.com/200">
-          <div class="card-content center-align">
+      <a href="/items/{{item.id}}">
+        <div class="card square">
+          <div class="card-image">
+            <img src="https://via.placeholder.com/200">
+            <div class="card-content center-align">
               <p>{{item.item_name}}</p>
               <p>${{item.item_price}}</p>
               <p>{{item.item_description}}</p>
-              <a href="/items/{{item.id}}">Link</a>
             </div>
           </div>
         </div>
+      </a>
     </div>
     {% endfor %}
-  {% else %}
-  <p>No items yet</p>
+    {% else %}
+    <p>No items yet</p>
   {% endif %}
   </div>
   

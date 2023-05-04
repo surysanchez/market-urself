@@ -3,87 +3,8 @@
 {% block content %}
 
 {% if is_user %}
-    <h3>Your Account</h3>
-    <p>Username: {{profile.user}}</p>
-    <p>Fist Name: {{profile.first_name}}</p>
-    <p>Last Name: {{profile.last_name}}</p>
-    <p>Address: {{profile.address}}</p>
-    <p>City: {{profile.city}}</p>
-    <a href="{% url 'profiles_update' profile.id %}">Update Info</a>
-    {% else %}
-    <h3>{{ profile.user }}</h3>
-    <p>{{profile.first_name}} {{profile.last_name}}</p>
-        {% if table %}
-        <a href="{% url 'tables_detail' table.id %}">
-            <p>{{ table.table_name }}</p>
-        </a>
-        {% else %}
-        <p>This user does not have a table</p>
-        {% endif %}
-    {% endif %}
-
-    <!-- <div class="container">
-  <div class="row">
-    <div class="col">
-    <div class="card-stacked">
-      <div class="card-image">
-        <img src="/media/table_images/custom_shirt.jpeg" class="circle materialboxed" width="250" height="250">
-      </div>
-      </div>
-      </div>
-    <div class="col s6">
-      <div class="card horizontal">
-        <div class="card-stacked">
-          <div class="card-content">
-            <p class="card-title">Basics</p>
-            <p>Username: {{profile.user.username}}</p>
-            <p>Name: {{profile.first_name}} {{profile.last_name}}</p>
-            <p>Email: {{profile.user.email}}</p>
-            <p>Address: {{profile.address}}</p>
-            <p>City: {{profile.city}}, {{profile.state}}</p>
-            <p>Zip: {{profile.zip}}</p>
-            <p>About: {{profile.about}}</p>
-          </div>
-          <div class="card-action center-align">
-            <a href="{% url 'profiles_update' profile.id %}">Update Public Profile</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="container">
-  <div class="row">
-    <div class="col">
-    <div class="card-stacked">
-      <div class="card-image">
-        <img src="/media/table_images/custom_shirt.jpeg" class="circle materialboxed" width="250" height="250">
-      </div>
-      </div>
-      </div>
-    <div class="col s6">
-      <div class="card horizontal z-depth-0">
-        <div class="card-stacked">
-          <div class="card-content">
-            <p class="card-title">Basics</p>
-            <p>Username: {{profile.user.username}}</p>
-            <p>Name: {{profile.first_name}} {{profile.last_name}}</p>
-            <p>Email: {{profile.user.email}}</p>
-            <p>Address: {{profile.address}}</p>
-            <p>City: {{profile.city}}, {{profile.state}}</p>
-            <p>Zip: {{profile.zip}}</p>
-            <p>About: {{profile.about}}</p>
-          </div>
-          <div class="card-action center-align">
-            <a href="{% url 'profiles_update' profile.id %}">Update Public Profile</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
-
+<h3>Your Account</h3>
+{% endif %}
 <div class="container">
   <div class="row">
     <div class="col">
@@ -100,18 +21,30 @@
             <p class="card-title">{{profile.first_name}} {{profile.last_name}}</p>
             <p><i class="tiny material-icons">account_circle</i>&nbsp;&nbsp;{{user.id}}</p>
             <p>Username: {{profile.user.username}}</p>
-            <p>Email: {{profile.user.email}}</p>
-            <p>Address: {{profile.address}} {{profile.city}}, {{profile.state}} {{profile.zip}}</p>
-            <p>Birthday: {{profile.birthday}}</p>
-            <p>About: {{profile.about}}</p>
+            {% if is_user %}
+              <p>Email: {{profile.user.email}}</p>
+              <p>Address: {{profile.address}}, {{profile.city}}, {{profile.state}} {{profile.zip}}</p>
+              <p>Birthday: {{profile.birthday}}</p>
+              <p>About: {{profile.about}}</p>
+            {% else %}
+              <p>About: {{profile.about}}</p>
+              {% if table %}
+                <a href="{% url 'tables_detail' table.id %}">
+                  <p>{{ table.table_name }}</p>
+                </a>
+              {% else %}
+                <p>This user does not have a table</p>
+              {% endif %}
+            {% endif %}
             <br>
+            {% if is_user %}
             <a href="{% url 'profiles_update' profile.id %}">Update Public Profile</a>
+            {% endif %}
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 
 {% endblock %}

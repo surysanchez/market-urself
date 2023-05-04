@@ -20,4 +20,9 @@
 {% endif %}
 <a href="{% url 'checkout' %}">Checkout</a>
 
+<form action="{% url 'clear_cart' %}" method=“POST”>
+    {% csrf_token %}
+    <input type="submit" value="Checkout">
+</form>
+
 {% endblock %}
