@@ -138,7 +138,6 @@ LOGOUT_REDIRECT_URL = '/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-# Django to Heroku
+# Django to Heroku deployment
 import django_on_heroku
 django_on_heroku.settings(locals())
