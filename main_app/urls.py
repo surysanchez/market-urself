@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .models import CATEGORIES
 
 urlpatterns = [
     # django sign up
@@ -37,7 +38,6 @@ urlpatterns = [
     path('reviews/create/', views.ReviewsCreate.as_view(), name='reviews_create'),
     path('reviews/<int:pk>/delete/', views.ReviewsDelete.as_view(), name='reviews_delete'),
 
-   
     # table details
     path('tables/<int:pk>/', views.tables_detail, name='tables_detail'),
     path('tables/create/', views.TableCreate.as_view(), name='tables_create'),
@@ -55,12 +55,9 @@ urlpatterns = [
     path('managers/create/', views.ManagerCreate.as_view(), name='managers_create'), 
     path('managers/<int:pk>/update/', views.ManagerUpdate.as_view(), name='managers_update'),
     path('managers/<int:pk>/delete/', views.ManagerDelete.as_view(), name='managers_delete'),
-
-    #categories
-    path('wearables', views.category, name='category_detail'),
-    path('homeables', views.category, name='category_detail'),
-    path('gardenables', views.category, name='category_detail'),
-    path('entertainables', views.category, name='category_detail'),
-    path('consumables', views.category, name='category_detail'),
-    path('miscellaneous', views.category, name='category_detail'),
 ]
+
+for category in CATEGORIES:
+    urlpatterns.append(
+        path(f"{category[0]}", views.category, name='category_detail')
+    )
