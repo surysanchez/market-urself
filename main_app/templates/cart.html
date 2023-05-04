@@ -15,4 +15,9 @@
         <h3>No items in cart yet</h3>
     {% endif %}
 
+<form action="{% url 'clear_cart' %}" method=“POST”>
+    {% csrf_token %}
+    <input type="submit" value="Checkout">
+</form>
+
 {% endblock %}
