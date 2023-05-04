@@ -24,6 +24,7 @@ urlpatterns = [
 
     # checkout
     path('checkout/', views.checkout, name='checkout'),
+    path('clearCart/', views.clear_cart, name ='clear_cart'),
 
     # item details
     path('items/', views.items_detail, name='items_detail'),

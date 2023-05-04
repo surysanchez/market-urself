@@ -32,6 +32,11 @@ def cart(request):
 def checkout(request):
   return render(request, 'checkout.html')
 
+def clear_cart(request):
+  cart = Cart.objects.get(user=request.user)
+  CartItem.objects.filter(cart = cart).delete()
+  return redirect('/')
+
 def category(request):
   absPath = request.path
   category = absPath.replace('/', '')
@@ -56,8 +61,14 @@ def items_detail(request, pk):
 
 def tables_detail(request, pk):
   table = Table.objects.get(id= pk)
+
+  if table.user == request.user:
+    is_user = True
+  else:
+    is_user = False
+
   items = Item.objects.filter(table=table)
-  return render(request, 'tables/detail.html', {'table': table, 'items': items})
+  return render(request, 'tables/detail.html', {'table': table, 'items': items, 'is_user': is_user})
 
 def profiles_detail(request, pk):
   profile = Profile.objects.get(id=pk)
@@ -65,10 +76,12 @@ def profiles_detail(request, pk):
     is_user = True
   else:
     is_user = False
+
   try:
     table = Table.objects.get(user=profile.user)
   except:
     table = None
+    
   return render(request, 'profiles/detail.html', {'profile': profile, 'table': table, 'is_user':is_user})
   
 
@@ -138,6 +151,7 @@ class ProfileCreate(CreateView):
 
   def form_valid(self, form):
     form.instance.user = self.request.user
+    Cart.objects.create(user=self.request.user)
     return super().form_valid(form)
 
 
