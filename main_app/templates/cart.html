@@ -2,23 +2,18 @@
 
 {% block content %}
 <h1>Cart Page</h1>
-{% if cart %}
     {% if items %}
         {% for item in items %}
         <div class="cart-item">
             <h3>{{ item.item.item_name }}</h3>
             <h4>Quantity: {{ item.quantity }}</h4>
-            <a href=''>remove</a>
             <a href="{% url 'cart_item_delete' item.id %}"><i class="material-icons">remove_shopping_cart</i></a>
         </div>
+        <a href="{% url 'checkout' %}">Checkout</a>
         {% endfor %}
     {% else %}
         <h3>No items in cart yet</h3>
     {% endif %}
-{% else %}
-<h3>does not exist</h3>
-{% endif %}
-<a href="{% url 'checkout' %}">Checkout</a>
 
 <form action="{% url 'clear_cart' %}" method=“POST”>
     {% csrf_token %}
