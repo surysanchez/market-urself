@@ -20,10 +20,10 @@
 </div>
 
 <div class="container">
+  {% if items %}
+  {% for item in items %}
   <div class="row">
     <div class="col s6 m3">
-      {% if items %}
-        {% for item in items %}
           <a href="/items/{{item.id}}">
             <div class="card square">
               <div class="card-image">
@@ -35,6 +35,7 @@
               </div>
             </div>
           </a>
+    </div>
         {% endfor %}
         {% else %}
         <div class="card square">
@@ -44,9 +45,8 @@
             </div>
           </div>
         </div>
+      </div>
       {% endif %}
-    </div>
   </div>
-</div>
 
 {% endblock %}
