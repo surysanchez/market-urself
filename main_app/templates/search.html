@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Search Results</h1>
+<br>
+<div>
+  <h4 class="center">Displaying results for '{{searchedStr}}'</h4>
+</div>
+<br>
 
 {% if results %}
 {% for result in results %}
@@ -22,6 +26,15 @@
     </a>
   </div>
   {% endfor %}
+  {% else%}
+  <div class="card square">
+    <div class="card-image">
+      <div class="card-content center-align">
+        <p>No Items to Display</p>
+      </div>
+    </div>
+  </div>
+  <h5>Check your spelling!</h5>
   {% endif %}
 </div>
 

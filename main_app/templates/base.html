@@ -108,7 +108,7 @@
 
 <ul id="dropdown1" class="dropdown-content">
     <li>Logged in as {{user.username}}</li>
-    <li><a href="/profiles/details/">My Profile</a></li>
+    <li><a href="{% url 'profiles_detail' user.id %}">My Profile</a></li>
     <li><a href="/managers/detail/">My Table</a></li>
     <li><a href="/accounts/logout/">Logout</a></li>
 </ul>

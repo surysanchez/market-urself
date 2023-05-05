@@ -24,8 +24,9 @@ def about(request):
 def search(request):
   query2 = request.GET.get('q')
   results = Item.objects.filter(item_name__icontains=query2)
+  searchedStr = query2
   
-  return render(request, 'search.html', {'results':results})
+  return render(request, 'search.html', {'results':results, 'searchedStr': searchedStr})
 
 @login_required
 def cart(request):
@@ -33,8 +34,10 @@ def cart(request):
   items = CartItem.objects.filter(cart = cart)
   return render(request, 'cart.html', {'cart': cart, 'items': items})
   
+@login_required
 def checkout(request):
-  return render(request, 'checkout.html')
+  profile = Profile.objects.get(user=request.user)
+  return render(request, 'checkout.html', {'profile': profile})
 
 def clear_cart(request):
   cart = Cart.objects.get(user=request.user)
