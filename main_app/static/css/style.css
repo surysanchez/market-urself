@@ -37,3 +37,29 @@ main {
 #lower a {
   color: var(--primary-color);
 }
+
+#welcome-name > a {
+  color: black;
+  text-decoration: underline;
+}
+
+.small-card {
+  height: 250px;
+}
+
+.card {
+  border-radius: 1vmin;
+}
+
+.card-image {
+  border-top-right-radius: 1vmin;
+  border-top-left-radius: 1vmin;
+}
+
+.search-bar {
+  border: 1px black solid;
+}
+
+.category-container {
+  background-color: var(--primary-color);
+}
