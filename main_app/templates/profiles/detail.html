@@ -1,12 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{{ user.username }}'s Profile</h1>
 
-<p>Fist Name: {{profile.first_name}}</p>
-<p>Last Name: {{profile.last_name}}</p>
-<p>Address: {{profile.address}}</p>
-<p>City: {{profile.city}}</p>
 {% if is_user %}
 <h3>Your Account</h3>
 {% endif %}
@@ -24,7 +19,7 @@
         <div class="card-stacked">
           <div class="card-content">
             <p class="card-title">{{profile.first_name}} {{profile.last_name}}</p>
-            <p><i class="tiny material-icons">account_circle</i>&nbsp;&nbsp;{{user.id}}</p>
+            <p><i class="tiny material-icons">account_circle</i>&nbsp;&nbsp;{{profile.id}}</p>
             <p>Username: {{profile.user.username}}</p>
             {% if is_user %}
               <p>Email: {{profile.user.email}}</p>

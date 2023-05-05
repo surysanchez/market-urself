@@ -2,8 +2,9 @@
 
 {% block content %}
 
+<br>
+
 {% if items %}
-<h4><a href="{% url 'checkout' %}">Proceed to Checkout</a></h4>
     {% for item in items %}
         <div class="row">
             <div class="col s6 m3">
@@ -24,6 +25,7 @@
             </div>
     {% endfor %}
         </div>
+        <h4><a href="{% url 'checkout' %}">Proceed to Checkout</a></h4>
 {% else %}
     <h4>Your cart is empty</h4>
     <i class="large material-icons">shopping_cart</i>

@@ -2,12 +2,20 @@
 
 {% block content %}
 
-<h1>Checkout Page</h1>
-
+<h4>Review your info and let's check out!</h4>
+<p>Email: {{profile.user.email}}</p>
+<p>Address: {{profile.address}}</p>
+<p>City: {{profile.city}}</p>
+<p>State: {{profile.state}}</p>
+<p>Zip Code: {{profile.zip}}</p>
+<a href="{% url 'profiles_update' profile.id %}">Edit Details</a>
+<br><br><br>
 
 <form action="{% url 'clear_cart' %}" method="POST">
     {% csrf_token %}
     <input type="submit" value="Checkout">
 </form>
+
+<br><br>
 
 {% endblock %}
