@@ -3,7 +3,7 @@
 {% block content %}
 <br>
 {% if user.is_authenticated %}
-<p>user exists</p>
+
 <div>
   <h4  id="welcome-name" class="center">Welcome back, <a href="">{{user.profile.first_name}}!</a></h4>
 </div>
@@ -21,6 +21,7 @@
 </div>
 <div class="row">
   <div class="container">
+    {% if featured_table %}
     <div class="col s6">
       <div class="card large">
         <div class="card-image">
@@ -42,6 +43,7 @@
         </div>
       </div>
     </div>
+    {% endif %}
     {% if featured_table %}
     
     {% if items %}
@@ -76,9 +78,8 @@
         </div>
       </div>
       {% endif %}
-  </div>
-    
-    {% endif%}
+    </div>
+    {% endif %}
   </div>
 </div>
 
@@ -89,7 +90,6 @@
 <div>
   <p class="divider"></p>
 </div>
-
 
 <div class="container">
   {% if items %}
