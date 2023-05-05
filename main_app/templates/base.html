@@ -32,8 +32,6 @@
                     </div>
                     <ul class="right">
                     {% if user.is_authenticated %}
-                    {% endif %}
-                    {% if user.is_authenticated %}
                     <li>
                         <a href="{% url 'managers_detail' %}"><i class="material-icons">storefront</i></a></li>
                         <ul class="right">
@@ -105,13 +103,15 @@
 </body>
 </html>
 
-
+{% if user.is_authenticated %}
 <ul id="dropdown1" class="dropdown-content">
     <li>Logged in as {{user.username}}</li>
     <li><a href="{% url 'profiles_detail' user.id %}">My Profile</a></li>
     <li><a href="/managers/detail/">My Table</a></li>
     <li><a href="/accounts/logout/">Logout</a></li>
 </ul>
+{% endif %}
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.dropdown-trigger');

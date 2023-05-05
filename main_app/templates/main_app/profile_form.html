@@ -1,8 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Almost Done!</h1>
-<h1>Just add a few more details!</h1>
+{% if profile %}
+<h3> Be sure to save if you make any changes!</h3>
+<form action="" method="POST">
+  {% csrf_token %}
+  <table>
+    {{form.as_table}}
+  </table>
+  <input type="submit" class="btn" value="Save Changes">
+</form>
+{% else %}
+<h3>Almost Done!</h3>
+<h4>Just add a few more details!</h4>
 <form action="" method="POST">
   {% csrf_token %}
   <table>
@@ -10,7 +20,7 @@
   </table>
   <input type="submit" class="btn" value="Create Profile">
 </form>
-{{ profile }}
-{{ user }}
+{% endif %}
+<br><br>
 
 {% endblock %}

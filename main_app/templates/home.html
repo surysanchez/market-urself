@@ -2,10 +2,18 @@
 
 {% block content %}
 <br>
+{% if user.is_authenticated %}
+<p>user exists</p>
 <div>
-  <h4  id="welcome-name" class="center">Welcome back, <a href="{% url 'profiles_detail' user.id %}">{{user.profile.first_name}}!</a></h4>
+  <h4  id="welcome-name" class="center">Welcome back, <a href="">{{user.profile.first_name}}!</a></h4>
 </div>
 <br>
+{% else %}
+<div>
+  <h4  id="welcome-name" class="center">Welcome to Market Urself</a></h4>
+</div>
+<br>
+{% endif %}
 
 <h4>Featured Table</h4>
 <div>

@@ -16,7 +16,8 @@ from .models import Table, Item, Profile, Cart, CartItem, Review
 def home(request):
   items = Item.objects.all()
   featured_table = Table.objects.get(id=1)
-  return render(request, 'home.html', {'items':items, 'featured_table': featured_table})
+  user = request.user
+  return render(request, 'home.html', {'items':items, 'featured_table': featured_table, 'user': user})
 
 def about(request):
   return render(request, 'about.html')
@@ -182,7 +183,7 @@ class ProfileCreate(CreateView):
 
 class ProfileUpdate(UpdateView):
   model = Profile
-  fields = ['first_name', 'last_name', 'address']
+  fields = ['first_name', 'last_name', 'address', 'city', 'zip']
 
 class ProfileDelete(DeleteView):
   pass
