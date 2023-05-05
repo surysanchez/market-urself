@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<section class="center-align">
   <h1>Delete Review</h1>
 
-  <h4>Are you sure you want to delete {{ object.name }}?</h4>
+  <h5>Are you sure you want to delete {{ object.name }}?</h5>
 
   <form action="" method="POST">
     {% csrf_token %}
     <input type="submit" value="Yes - Delete!" class="btn">
     <a href="{% url 'items_detail' review.id %}">Cancel</a>
   </form>
+</section>
 {% endblock %}
