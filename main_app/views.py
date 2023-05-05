@@ -15,7 +15,8 @@ from .models import Table, Item, Profile, Cart, CartItem, Review
 
 def home(request):
   items = Item.objects.all()
-  return render(request, 'home.html', {'items':items})
+  featured_table = Table.objects.get(id=1)
+  return render(request, 'home.html', {'items':items, 'featured_table': featured_table})
 
 def about(request):
   return render(request, 'about.html')

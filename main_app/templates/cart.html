@@ -1,23 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Cart Page</h1>
-    {% if items %}
-        {% for item in items %}
-        <div class="cart-item">
-            <h3>{{ item.item.item_name }}</h3>
-            <h4>Quantity: {{ item.quantity }}</h4>
-            <a href="{% url 'cart_item_delete' item.id %}"><i class="material-icons">remove_shopping_cart</i></a>
-        </div>
-        <a href="{% url 'checkout' %}">Checkout</a>
-        {% endfor %}
-    {% else %}
-        <h3>No items in cart yet</h3>
-    {% endif %}
 
-<form action="{% url 'clear_cart' %}" method=“POST”>
-    {% csrf_token %}
-    <input type="submit" value="Checkout">
-</form>
+{% if items %}
+<h4><a href="{% url 'checkout' %}">Proceed to Checkout</a></h4>
+    {% for item in items %}
+        <div class="row">
+            <div class="col s6 m3">
+                <div class="card square">
+                    <div class="card-image">
+                        <div class="card-content center-align">
+                            {% if item.image %}
+                            <img src="/media/{{item.image}}" height="150" width="150">
+                            {% else %}
+                            <img src="https://via.placeholder.com/150" height="150" width="150">
+                            {% endif %}
+                            <h4>{{ item.item.item_name }}</h4>
+                            <h5>Quantity: {{ item.quantity }}</h5>
+                            <a href="{% url 'cart_item_delete' item.id %}"><i class="material-icons">remove_shopping_cart</i>Remove From Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    {% endfor %}
+        </div>
+{% else %}
+    <h4>Your cart is empty</h4>
+    <i class="large material-icons">shopping_cart</i>
+    <h6><a href="/">There are plenty of worthy items around, let's check some out</a></h6>
+{% endif %}
 
 {% endblock %}

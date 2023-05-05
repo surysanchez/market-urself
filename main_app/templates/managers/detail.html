@@ -10,11 +10,11 @@
   <a href="{% url 'tables_delete' table.id %}" class="btn">Delete Table</a>
 </div>
 <a href="{% url 'tables_detail' table.id %}">
-  <div class="card" >
+  <div class="card">
     <div class="card-content">
       <p class="card-title">{{ table.table_name }}</p>
       {% if table.image %}
-      <p>{{table.image}}</p>
+      <img src="/media/{{table.image}}" height="250" width="250">
       {% else %}
       <p>No image added</p>
       {% endif %}
