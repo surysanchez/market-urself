@@ -12,7 +12,7 @@
 
 
 # App's Wireframe 
- <img src='https://i.imgur.com/6coQBkr.png' height="250" width= "500">
+ <img src='https://i.imgur.com/6coQBkr.png' height="500" width= "400">
 
 <br> 
 
